@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 final class FeedListViewModel: ObservableObject {
     @Published private var rssFeeds: [RssFeed] = []
     @Published var isLoading = false
@@ -18,7 +19,9 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onStarButtonTapped() {
-        isFilteringFavorites.toggle()
+        withAnimation(.default) {
+            isFilteringFavorites.toggle()
+        }
     }
     
     func onDelete(_ feed: RssFeed) {
@@ -59,21 +62,25 @@ final class FeedListViewModel: ObservableObject {
         
         try? await Task.sleep(for: .seconds(1))
         
-        rssFeeds = [
-            RssFeed(
-                title: "Slobodna Dalmacija",
-                image: URL(string: "https://picsum.photos/200"),
-                description: "Svježe iz Dalmacije",
-                isFavorite: true
-            ),
-            RssFeed(
-                title: "Jutarnji List",
-                description: "RSS Feed Jutarnjeg"
-            ),
-            RssFeed(
-                title: "Vecernji",
-                description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
-            )
-        ]
+        // TODO: Item fetching and persistence
+        
+        withAnimation {
+            rssFeeds = [
+                RssFeed(
+                    title: "Slobodna Dalmacija",
+                    image: URL(string: "https://picsum.photos/200"),
+                    description: "Svježe iz Dalmacije",
+                    isFavorite: true
+                ),
+                RssFeed(
+                    title: "Jutarnji List",
+                    description: "RSS Feed Jutarnjeg"
+                ),
+                RssFeed(
+                    title: "Vecernji",
+                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
+                )
+            ]
+        }
     }
 }
