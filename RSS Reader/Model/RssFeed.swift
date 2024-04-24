@@ -12,3 +12,9 @@ struct RssFeed {
     var image: URL?
     let description: String
 }
+
+extension RssFeed: Identifiable {
+    var id: String {
+        title
+    }
+}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedRow: View {
+struct FeedRowView: View {
     let feed: RssFeed
     
     var body: some View {
@@ -25,6 +25,7 @@ struct FeedRow: View {
                 
                 Text(feed.description)
                     .font(.subheadline)
+                    .opacity(0.8)
             }
             .multilineTextAlignment(.leading)
             
@@ -34,7 +35,7 @@ struct FeedRow: View {
 }
 
 #Preview {
-    FeedRow(
+    FeedRowView(
         feed: RssFeed(
             title: "Slobodna Dalmacija",
             image: URL(string: "https://picsum.photos/200"),
@@ -45,7 +46,7 @@ struct FeedRow: View {
 }
 
 #Preview {
-    FeedRow(
+    FeedRowView(
         feed: RssFeed(
             title: "Jutarnji List",
             description: "RSS Feed Jutarnjeg"
