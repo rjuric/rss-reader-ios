@@ -25,7 +25,6 @@ struct FeedListView: View {
                         Label(favoriteTitle, systemImage: favoriteIcon)
                     }
                 )
-                
                 Button(
                     role: .destructive,
                     action: { viewModel.onDelete(rssFeed) },
@@ -37,18 +36,32 @@ struct FeedListView: View {
         }
         .listStyle(.plain)
         .navigationTitle("RSS Feeds")
+        .sheet(isPresented: $viewModel.isPresentingNewFeed) {
+            let isFirstFeed = viewModel.isFirstFeed
+            
+            NewFeedView(viewModel: NewFeedViewModel(isFirstFeed: isFirstFeed))
+                .interactiveDismissDisabled(isFirstFeed)
+                .presentationBackground(Material.ultraThin)
+        }
         .toolbar {
-            Button(action: viewModel.onStarButtonTapped) {
-                if viewModel.isFilteringFavorites {
-                    Image(systemName: "star.fill")
-                } else {
-                    Image(systemName: "star")
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: viewModel.onPlusTapped) {
+                    Image(systemName: "plus")
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: viewModel.onStarButtonTapped) {
+                    if viewModel.isFilteringFavorites {
+                        Image(systemName: "star.fill")
+                    } else {
+                        Image(systemName: "star")
+                    }
                 }
             }
         }
-        .task {
-            await viewModel.onAppearTask()
-        }
+        .task { await viewModel.onAppearTask() }
+        .refreshable { await viewModel.onRefreshAction() }
         .isLoading(viewModel.isLoading)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C3CBA542BD9750700CA13A9 /* InnerHeightPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA532BD9750700CA13A9 /* InnerHeightPreferenceKey.swift */; };
+		6C3CBA5C2BD97C4E00CA13A9 /* NewFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */; };
 		6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */; };
 		6CEB86732BD9401100CD6B48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86722BD9401100CD6B48 /* ContentView.swift */; };
 		6CEB86752BD9401200CD6B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CEB86742BD9401200CD6B48 /* Assets.xcassets */; };
@@ -21,6 +23,7 @@
 		6CEB86AF2BD94D9A00CD6B48 /* FeedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86AE2BD94D9A00CD6B48 /* FeedListViewModel.swift */; };
 		6CEB86B42BD95CE300CD6B48 /* IsLoadingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86B32BD95CE300CD6B48 /* IsLoadingViewModifier.swift */; };
 		6CEB86B72BD9646F00CD6B48 /* Optional+isNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */; };
+		6CEB86BE2BD96BC500CD6B48 /* NewFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86BD2BD96BC500CD6B48 /* NewFeedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C3CBA532BD9750700CA13A9 /* InnerHeightPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerHeightPreferenceKey.swift; sourceTree = "<group>"; };
+		6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedViewModel.swift; sourceTree = "<group>"; };
 		6CEB866D2BD9401100CD6B48 /* RSS Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS_ReaderApp.swift; sourceTree = "<group>"; };
 		6CEB86722BD9401100CD6B48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 		6CEB86AE2BD94D9A00CD6B48 /* FeedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModel.swift; sourceTree = "<group>"; };
 		6CEB86B32BD95CE300CD6B48 /* IsLoadingViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoadingViewModifier.swift; sourceTree = "<group>"; };
 		6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+isNil.swift"; sourceTree = "<group>"; };
+		6CEB86BD2BD96BC500CD6B48 /* NewFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C3CBA502BD974E700CA13A9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6C3CBA522BD974F400CA13A9 /* PreferenceKeys */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6C3CBA522BD974F400CA13A9 /* PreferenceKeys */ = {
+			isa = PBXGroup;
+			children = (
+				6C3CBA532BD9750700CA13A9 /* InnerHeightPreferenceKey.swift */,
+			);
+			path = PreferenceKeys;
+			sourceTree = "<group>";
+		};
+		6C3CBA582BD97B6900CA13A9 /* NewFeed */ = {
+			isa = PBXGroup;
+			children = (
+				6CEB86BD2BD96BC500CD6B48 /* NewFeedView.swift */,
+				6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */,
+			);
+			path = NewFeed;
+			sourceTree = "<group>";
+		};
 		6CEB86642BD9401100CD6B48 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +122,7 @@
 		6CEB866F2BD9401100CD6B48 /* RSS Reader */ = {
 			isa = PBXGroup;
 			children = (
+				6C3CBA502BD974E700CA13A9 /* Common */,
 				6CEB86B52BD9646100CD6B48 /* Extensions */,
 				6CEB86AD2BD94C8E00CD6B48 /* Resources */,
 				6CEB86A62BD9497300CD6B48 /* Navigation */,
@@ -122,6 +154,7 @@
 		6CEB869A2BD9409D00CD6B48 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6C3CBA582BD97B6900CA13A9 /* NewFeed */,
 				6CEB86B02BD95CB200CD6B48 /* Common */,
 				6CEB869E2BD9413200CD6B48 /* Feed */,
 			);
@@ -292,11 +325,14 @@
 				6CEB86AC2BD94A4700CD6B48 /* NavigationDestination.swift in Sources */,
 				6CEB86AF2BD94D9A00CD6B48 /* FeedListViewModel.swift in Sources */,
 				6CEB86A02BD941AE00CD6B48 /* FeedRowView.swift in Sources */,
+				6C3CBA542BD9750700CA13A9 /* InnerHeightPreferenceKey.swift in Sources */,
 				6CEB86732BD9401100CD6B48 /* ContentView.swift in Sources */,
 				6CEB86AA2BD949D400CD6B48 /* FeedNavigationViewModel.swift in Sources */,
 				6CEB86A22BD9453F00CD6B48 /* FeedListView.swift in Sources */,
 				6CEB86A82BD9498500CD6B48 /* FeedNavigationWrapper.swift in Sources */,
 				6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */,
+				6CEB86BE2BD96BC500CD6B48 /* NewFeedView.swift in Sources */,
+				6C3CBA5C2BD97C4E00CA13A9 /* NewFeedViewModel.swift in Sources */,
 				6CEB869D2BD940C400CD6B48 /* RssFeed.swift in Sources */,
 				6CEB86B72BD9646F00CD6B48 /* Optional+isNil.swift in Sources */,
 			);
@@ -456,7 +492,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -486,7 +522,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

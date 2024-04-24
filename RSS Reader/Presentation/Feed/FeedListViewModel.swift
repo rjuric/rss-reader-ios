@@ -13,11 +13,17 @@ final class FeedListViewModel: ObservableObject {
     @Published var isLoading = false
     
     @Published var isFilteringFavorites = false
+
+    @Published var isPresentingNewFeed = false
     
     var filteredFeeds: [RssFeed] {
         guard let rssFeeds else { return [] }
         
         return isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
+    }
+    
+    var isFirstFeed: Bool {
+        rssFeeds?.isEmpty == true
     }
     
     func onStarButtonTapped() {
@@ -58,12 +64,11 @@ final class FeedListViewModel: ObservableObject {
         "trash"
     }
     
-    func onAppearTask() async {
-        guard rssFeeds.isNil else { return }
-        
-        isLoading = true
-        defer { isLoading = false }
-        
+    func onPlusTapped() {
+        isPresentingNewFeed = true
+    }
+    
+    private func fetchAndSetRssFeeds() async {
         try? await Task.sleep(for: .seconds(2))
         
         // TODO: Item fetching and persistence
@@ -86,5 +91,18 @@ final class FeedListViewModel: ObservableObject {
                 )
             ]
         }
+    }
+    
+    func onAppearTask() async {
+        guard rssFeeds.isNil else { return }
+        
+        isLoading = true
+        defer { isLoading = false }
+        
+        await fetchAndSetRssFeeds()
+    }
+    
+    func onRefreshAction() async {
+        await fetchAndSetRssFeeds()
     }
 }
