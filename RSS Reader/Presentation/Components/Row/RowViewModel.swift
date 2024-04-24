@@ -1,5 +1,5 @@
 //
-//  FeedRowViewModel.swift
+//  RowViewModel.swift
 //  RSS Reader
 //
 //  Created by rjuric on 24.04.2024..
@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct FeedRowViewModel {
+struct RowViewModel {
     let title: String
     var image: FeedRowImage?
     let description: String
     
     enum FeedRowImage {
         case remote(URL)
-        case local(String)
+        case symbol(String)
     }
 }
 
-extension FeedRowViewModel {
+extension RowViewModel {
     init(from rssFeed: RssFeed) {
         title = rssFeed.title
         description = rssFeed.description
@@ -29,7 +29,7 @@ extension FeedRowViewModel {
     }
 }
 
-extension FeedRowViewModel {
+extension RowViewModel {
     init(from article: Article) {
         title = article.title
         description = article.description

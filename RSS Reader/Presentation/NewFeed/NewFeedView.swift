@@ -41,6 +41,7 @@ struct NewFeedView: View {
                 .foregroundStyle(.foreground)
                 .clipShape(RoundedRectangle(cornerRadius: 4))
                 .focused($isFocused)
+                .keyboardType(.URL)
             
             Spacer()
                 .frame(height: 24)

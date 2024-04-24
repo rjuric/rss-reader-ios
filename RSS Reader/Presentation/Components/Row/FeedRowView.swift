@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct FeedRowView: View {
-    let viewModel: FeedRowViewModel
+struct RowView: View {
+    let viewModel: RowViewModel
     
     var body: some View {
         HStack(spacing: 8) {
@@ -36,16 +36,20 @@ struct FeedRowView: View {
                     .scaledToFit()
                     .frame(width: 60, height: 60)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-            case .local(let systemName):
+            case .symbol(let systemName):
                 Image(systemName: systemName)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(20)
+                    .frame(width: 60, height: 60)
             }
         }
     }
 }
 
 #Preview {
-    FeedRowView(
-        viewModel: FeedRowViewModel(
+    RowView(
+        viewModel: RowViewModel(
             title: "Slobodna Dalmacija",
             image: .remote(URL(string: "https://picsum.photos/200")!),
             description: "Svježe iz Dalmacije"
@@ -55,8 +59,8 @@ struct FeedRowView: View {
 }
 
 #Preview {
-    FeedRowView(
-        viewModel: FeedRowViewModel(
+    RowView(
+        viewModel: RowViewModel(
             title: "Jutarnji List",
             description: "RSS Feed Jutarnjeg"
         )

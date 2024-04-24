@@ -18,7 +18,7 @@ struct FeedListView: View {
                 )
                 
                 NavigationLink(value: destination) {
-                    FeedRowView(viewModel: FeedRowViewModel(from: rssFeed))
+                    RowView(viewModel: RowViewModel(from: rssFeed))
                 }
                 .contextMenu {
                     Button(
@@ -41,10 +41,16 @@ struct FeedListView: View {
             }
             
             if viewModel.isShowingNewFeedCell {
-                NewFeedRowView()
-                    .onTapGesture {
-                        viewModel.onPlusTapped()
-                    }
+                RowView(
+                    viewModel: RowViewModel(
+                        title: "Ran out of things to read?",
+                        image: .symbol("plus.circle"),
+                        description: "Tap here to add another feed."
+                    )
+                )
+                .onTapGesture {
+                    viewModel.onPlusTapped()
+                }
             }
         }
         .listStyle(.plain)

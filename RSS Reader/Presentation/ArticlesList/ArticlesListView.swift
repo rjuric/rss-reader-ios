@@ -14,7 +14,7 @@ struct ArticlesListView: View {
         List {
             ForEach(viewModel.articles) { article in
                 NavigationLink(value: NavigationDestination.article(ArticleViewModel(from: article))) {
-                    FeedRowView(viewModel: FeedRowViewModel(from: article))
+                    RowView(viewModel: RowViewModel(from: article))
                 }
             }
         }
@@ -31,20 +31,17 @@ struct ArticlesListView: View {
                     Article(
                         title: "[ŠOK] Prebio dvojicu ispred Velveta",
                         image: URL(string: "https://picsum.photos/200")!,
-                        description: "Pogledajte što je napravio",
-                        url: URL(string: "https://www.vecernji.hr/vijesti/raskol-u-mostu-marija-selak-raspudic-prva-ima-konferenciju-za-medije-onda-bozo-petrov-1763955")!
+                        description: "Pogledajte što je napravio"
                     ),
                     Article(
                         title: "[VIDEO] Raspudići napuštaju Most",
                         image: nil,
-                        description: "Tragedija hrvatskog naroda",
-                        url: URL(string: "https://www.vecernji.hr/sport/u-hajduk-se-vraca-bivsi-trener-talijani-se-raspisali-o-kandidatu-za-klupu-na-poljudu-1764180")!
+                        description: "Tragedija hrvatskog naroda"
                     ),
                     Article(
                         title: "Penava: Što rade našoj djeci?",
                         image: URL(string: "https://picsum.photos/200")!,
-                        description: "Djeca uče arapske brojeve u školi",
-                        url: URL(string: "https://www.vecernji.hr/showbiz/baby-lasagni-ukrali-identitet-ozbiljno-se-obratio-publici-nemojte-dati-novac-to-nisam-ja-1761523")!
+                        description: "Djeca uče arapske brojeve u školi"
                     ),
                 ],
                 publication: "Večernji"
