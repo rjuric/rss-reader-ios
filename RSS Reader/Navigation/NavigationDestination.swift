@@ -9,7 +9,7 @@ import Foundation
 
 enum NavigationDestination {
     case feedArticles(ArticlesListViewModel)
-    case article
+    case article(ArticleViewModel)
 }
 
 extension NavigationDestination: Hashable {}

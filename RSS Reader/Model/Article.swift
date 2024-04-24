@@ -11,6 +11,7 @@ struct Article {
     let title: String
     let image: URL?
     let description: String
+    var url: URL = URL(string: "https://en.wikipedia.org/wiki/Special:Random")!
 }
 
 extension Article: Identifiable {
