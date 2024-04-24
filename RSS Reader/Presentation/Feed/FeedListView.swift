@@ -8,39 +8,54 @@
 import SwiftUI
 
 struct FeedListView: View {
-    let feeds: [RssFeed]
+    @StateObject private var viewModel = FeedListViewModel()
     
     var body: some View {
         List {
-            ForEach(feeds) { rssFeed in
+            ForEach(viewModel.filteredFeeds) { rssFeed in
                 NavigationLink(value: NavigationDestination.rssFeed) {
                     FeedRowView(feed: rssFeed)
+                }
+                .contextMenu {
+                    Button(
+                        action: { viewModel.onFavorite(rssFeed) },
+                        label: {
+                            let favoriteTitle = viewModel.toggleFavoriteLabel(for: rssFeed)
+                            let favoriteIcon = viewModel.toggleFavoriteIcon(for: rssFeed)
+                            
+                            Label(favoriteTitle, systemImage: favoriteIcon)
+                        }
+                    )
+                    
+                    Button(
+                        role: .destructive,
+                        action: { viewModel.onDelete(rssFeed) },
+                        label: {
+                            Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
+                        }
+                    )
                 }
             }
         }
         .listStyle(.plain)
         .navigationTitle("RSS Feeds")
+        .toolbar {
+            Button(action: viewModel.onStarButtonTapped) {
+                if viewModel.isFilteringFavorites {
+                    Image(systemName: "star.fill")
+                } else {
+                    Image(systemName: "star")
+                }
+            }
+        }
+        .task {
+            await viewModel.onAppearTask()
+        }
     }
 }
 
 #Preview {
     FeedNavigationWrapper {
-        FeedListView(
-            feeds: [
-                RssFeed(
-                    title: "Slobodna Dalmacija",
-                    image: URL(string: "https://picsum.photos/200"),
-                    description: "Svježe iz Dalmacije"
-                ),
-                RssFeed(
-                    title: "Jutarnji List",
-                    description: "RSS Feed Jutarnjeg"
-                ),
-                RssFeed(
-                    title: "Vecernji",
-                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
-                )
-            ]
-        )
+        FeedListView()
     }
 }
