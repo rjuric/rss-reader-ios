@@ -51,6 +51,7 @@ struct FeedListView: View {
         .task {
             await viewModel.onAppearTask()
         }
+        .isLoading(viewModel.isLoading)
     }
 }
 
