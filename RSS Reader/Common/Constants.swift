@@ -14,5 +14,6 @@ enum Constants {
         static let star = "star"
         static let starFilled = "star.fill"
         static let trash = "trash"
+        static let safari = "safari"
     }
 }
