@@ -9,13 +9,15 @@ import SwiftUI
 
 @MainActor
 final class FeedListViewModel: ObservableObject {
-    @Published private var rssFeeds: [RssFeed] = []
+    @Published private var rssFeeds: [RssFeed]?
     @Published var isLoading = false
     
     @Published var isFilteringFavorites = false
     
     var filteredFeeds: [RssFeed] {
-        isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
+        guard let rssFeeds else { return [] }
+        
+        return isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
     }
     
     func onStarButtonTapped() {
@@ -25,17 +27,17 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onDelete(_ feed: RssFeed) {
-        rssFeeds.removeAll(where: { $0.id == feed.id })
+        rssFeeds?.removeAll(where: { $0.id == feed.id })
         
         // TODO: Persistance
     }
     
     func onFavorite(_ feed: RssFeed) {
-        guard let feedIndex = rssFeeds.firstIndex(where: { $0.id == feed.id }) else {
+        guard let feedIndex = rssFeeds?.firstIndex(where: { $0.id == feed.id }) else {
             return
         }
         
-        rssFeeds[feedIndex].isFavorite.toggle()
+        rssFeeds?[feedIndex].isFavorite.toggle()
         
         // TODO: Persistance
     }
@@ -57,10 +59,12 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onAppearTask() async {
+        guard rssFeeds.isNil else { return }
+        
         isLoading = true
         defer { isLoading = false }
         
-        try? await Task.sleep(for: .seconds(1))
+        try? await Task.sleep(for: .seconds(2))
         
         // TODO: Item fetching and persistence
         

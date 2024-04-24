@@ -20,6 +20,7 @@
 		6CEB86AC2BD94A4700CD6B48 /* NavigationDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86AB2BD94A4700CD6B48 /* NavigationDestination.swift */; };
 		6CEB86AF2BD94D9A00CD6B48 /* FeedListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86AE2BD94D9A00CD6B48 /* FeedListViewModel.swift */; };
 		6CEB86B42BD95CE300CD6B48 /* IsLoadingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86B32BD95CE300CD6B48 /* IsLoadingViewModifier.swift */; };
+		6CEB86B72BD9646F00CD6B48 /* Optional+isNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		6CEB86AB2BD94A4700CD6B48 /* NavigationDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDestination.swift; sourceTree = "<group>"; };
 		6CEB86AE2BD94D9A00CD6B48 /* FeedListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListViewModel.swift; sourceTree = "<group>"; };
 		6CEB86B32BD95CE300CD6B48 /* IsLoadingViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoadingViewModifier.swift; sourceTree = "<group>"; };
+		6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+isNil.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		6CEB866F2BD9401100CD6B48 /* RSS Reader */ = {
 			isa = PBXGroup;
 			children = (
+				6CEB86B52BD9646100CD6B48 /* Extensions */,
 				6CEB86AD2BD94C8E00CD6B48 /* Resources */,
 				6CEB86A62BD9497300CD6B48 /* Navigation */,
 				6CEB869B2BD940A400CD6B48 /* Model */,
@@ -175,6 +178,14 @@
 				6CEB86B32BD95CE300CD6B48 /* IsLoadingViewModifier.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		6CEB86B52BD9646100CD6B48 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +298,7 @@
 				6CEB86A82BD9498500CD6B48 /* FeedNavigationWrapper.swift in Sources */,
 				6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */,
 				6CEB869D2BD940C400CD6B48 /* RssFeed.swift in Sources */,
+				6CEB86B72BD9646F00CD6B48 /* Optional+isNil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
