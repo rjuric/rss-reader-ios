@@ -26,6 +26,10 @@ final class FeedListViewModel: ObservableObject {
         rssFeeds?.isEmpty == true
     }
     
+    var isShowingNewFeedCell: Bool {
+        !rssFeeds.isNil
+    }
+    
     func onStarButtonTapped() {
         withAnimation(.default) {
             isFilteringFavorites.toggle()

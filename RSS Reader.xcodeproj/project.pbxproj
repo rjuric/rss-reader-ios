@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C3CBA542BD9750700CA13A9 /* InnerHeightPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA532BD9750700CA13A9 /* InnerHeightPreferenceKey.swift */; };
 		6C3CBA5C2BD97C4E00CA13A9 /* NewFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */; };
+		6C3CBA5E2BD9804200CA13A9 /* NewFeedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA5D2BD9804200CA13A9 /* NewFeedRowView.swift */; };
 		6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */; };
 		6CEB86732BD9401100CD6B48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86722BD9401100CD6B48 /* ContentView.swift */; };
 		6CEB86752BD9401200CD6B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CEB86742BD9401200CD6B48 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		6C3CBA532BD9750700CA13A9 /* InnerHeightPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerHeightPreferenceKey.swift; sourceTree = "<group>"; };
 		6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedViewModel.swift; sourceTree = "<group>"; };
+		6C3CBA5D2BD9804200CA13A9 /* NewFeedRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedRowView.swift; sourceTree = "<group>"; };
 		6CEB866D2BD9401100CD6B48 /* RSS Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS_ReaderApp.swift; sourceTree = "<group>"; };
 		6CEB86722BD9401100CD6B48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				6CEB86BD2BD96BC500CD6B48 /* NewFeedView.swift */,
 				6C3CBA5B2BD97C4E00CA13A9 /* NewFeedViewModel.swift */,
+				6C3CBA5D2BD9804200CA13A9 /* NewFeedRowView.swift */,
 			);
 			path = NewFeed;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				6CEB86A82BD9498500CD6B48 /* FeedNavigationWrapper.swift in Sources */,
 				6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */,
 				6CEB86BE2BD96BC500CD6B48 /* NewFeedView.swift in Sources */,
+				6C3CBA5E2BD9804200CA13A9 /* NewFeedRowView.swift in Sources */,
 				6C3CBA5C2BD97C4E00CA13A9 /* NewFeedViewModel.swift in Sources */,
 				6CEB869D2BD940C400CD6B48 /* RssFeed.swift in Sources */,
 				6CEB86B72BD9646F00CD6B48 /* Optional+isNil.swift in Sources */,

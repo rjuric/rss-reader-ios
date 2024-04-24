@@ -11,27 +11,36 @@ struct FeedListView: View {
     @StateObject private var viewModel = FeedListViewModel()
     
     var body: some View {
-        List(viewModel.filteredFeeds) { rssFeed in
-            NavigationLink(value: NavigationDestination.rssFeed) {
-                FeedRowView(feed: rssFeed)
+        List {
+            ForEach(viewModel.filteredFeeds) { rssFeed in
+                NavigationLink(value: NavigationDestination.rssFeed) {
+                    FeedRowView(feed: rssFeed)
+                }
+                .contextMenu {
+                    Button(
+                        action: { viewModel.onFavorite(rssFeed) },
+                        label: {
+                            let favoriteTitle = viewModel.toggleFavoriteLabel(for: rssFeed)
+                            let favoriteIcon = viewModel.toggleFavoriteIcon(for: rssFeed)
+                            
+                            Label(favoriteTitle, systemImage: favoriteIcon)
+                        }
+                    )
+                    Button(
+                        role: .destructive,
+                        action: { viewModel.onDelete(rssFeed) },
+                        label: {
+                            Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
+                        }
+                    )
+                }
             }
-            .contextMenu {
-                Button(
-                    action: { viewModel.onFavorite(rssFeed) },
-                    label: {
-                        let favoriteTitle = viewModel.toggleFavoriteLabel(for: rssFeed)
-                        let favoriteIcon = viewModel.toggleFavoriteIcon(for: rssFeed)
-                        
-                        Label(favoriteTitle, systemImage: favoriteIcon)
+            
+            if viewModel.isShowingNewFeedCell {
+                NewFeedRowView()
+                    .onTapGesture {
+                        viewModel.onPlusTapped()
                     }
-                )
-                Button(
-                    role: .destructive,
-                    action: { viewModel.onDelete(rssFeed) },
-                    label: {
-                        Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
-                    }
-                )
             }
         }
         .listStyle(.plain)
