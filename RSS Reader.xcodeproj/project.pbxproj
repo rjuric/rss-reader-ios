@@ -55,6 +55,7 @@
 		6C3CBA722BD99D0E00CA13A9 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		6C3CBA742BD99E1200CA13A9 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		6C3CBA772BD9A27A00CA13A9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6C3CBA792BD9A7CD00CA13A9 /* RSS-Reader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RSS-Reader-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6CEB866D2BD9401100CD6B48 /* RSS Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS_ReaderApp.swift; sourceTree = "<group>"; };
 		6CEB86722BD9401100CD6B48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 		6CEB866F2BD9401100CD6B48 /* RSS Reader */ = {
 			isa = PBXGroup;
 			children = (
+				6C3CBA792BD9A7CD00CA13A9 /* RSS-Reader-Info.plist */,
 				6C3CBA502BD974E700CA13A9 /* Common */,
 				6CEB86B52BD9646100CD6B48 /* Extensions */,
 				6CEB86AD2BD94C8E00CD6B48 /* Resources */,
@@ -551,9 +553,9 @@
 				DEVELOPMENT_TEAM = 58J6LXC5V5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "RSS-Reader-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -582,9 +584,9 @@
 				DEVELOPMENT_TEAM = 58J6LXC5V5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "RSS-Reader-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
