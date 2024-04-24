@@ -1,5 +1,5 @@
 //
-//  RssFeed.swift
+//  Article.swift
 //  RSS Reader
 //
 //  Created by rjuric on 24.04.2024..
@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct RssFeed {
+struct Article {
     let title: String
-    var image: URL?
+    let image: URL?
     let description: String
-    var isFavorite: Bool = false
-    var articles: [Article] = []
 }
 
-extension RssFeed: Identifiable {
+extension Article: Identifiable {
     var id: String {
         title
     }
 }
+
+extension Article: Equatable {}

@@ -8,8 +8,8 @@
 import Foundation
 
 enum NavigationDestination {
-    case rssFeed
-    case feedItem
+    case feedArticles(ArticlesListViewModel)
+    case article
 }
 
 extension NavigationDestination: Hashable {}

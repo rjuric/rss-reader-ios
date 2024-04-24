@@ -13,8 +13,12 @@ struct FeedListView: View {
     var body: some View {
         List {
             ForEach(viewModel.filteredFeeds) { rssFeed in
-                NavigationLink(value: NavigationDestination.rssFeed) {
-                    FeedRowView(feed: rssFeed)
+                let destination = NavigationDestination.feedArticles(
+                    viewModel.articlesViewModel(for: rssFeed)
+                )
+                
+                NavigationLink(value: destination) {
+                    FeedRowView(viewModel: FeedRowViewModel(from: rssFeed))
                 }
                 .contextMenu {
                     Button(

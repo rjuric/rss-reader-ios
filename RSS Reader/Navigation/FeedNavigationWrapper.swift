@@ -17,9 +17,9 @@ struct FeedNavigationWrapper<Content: View>: View {
             content
                 .navigationDestination(for: NavigationDestination.self) { item in
                     switch item {
-                    case .rssFeed:
-                        Text("TODO: RSS Item List View")
-                    case .feedItem:
+                    case let .feedArticles(viewModel):
+                        ArticlesListView(viewModel: viewModel)
+                    case .article:
                         Text("TODO: RSS Article Item")
                     }
                 }

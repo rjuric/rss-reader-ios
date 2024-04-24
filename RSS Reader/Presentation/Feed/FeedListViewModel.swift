@@ -22,6 +22,13 @@ final class FeedListViewModel: ObservableObject {
         return isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
     }
     
+    func articlesViewModel(for feed: RssFeed) -> ArticlesListViewModel {
+        ArticlesListViewModel(
+            articles: feed.articles,
+            publication: feed.title
+        )
+    }
+    
     var isFirstFeed: Bool {
         rssFeeds?.isEmpty == true
     }
@@ -83,7 +90,24 @@ final class FeedListViewModel: ObservableObject {
                     title: "Slobodna Dalmacija",
                     image: URL(string: "https://picsum.photos/200"),
                     description: "Svježe iz Dalmacije",
-                    isFavorite: true
+                    isFavorite: true,
+                    articles: [
+                        Article(
+                            title: "[ŠOK] Prebio dvojicu ispred Velveta",
+                            image: URL(string: "https://picsum.photos/200")!,
+                            description: "Pogledajte što je napravio"
+                        ),
+                        Article(
+                            title: "[VIDEO] Raspudići napuštaju Most",
+                            image: nil,
+                            description: "Tragedija hrvatskog naroda"
+                        ),
+                        Article(
+                            title: "Penava: Što rade našoj djeci?",
+                            image: URL(string: "https://picsum.photos/200")!,
+                            description: "Djeca uče arapske brojeve u školi"
+                        ),
+                    ]
                 ),
                 RssFeed(
                     title: "Jutarnji List",
@@ -91,7 +115,19 @@ final class FeedListViewModel: ObservableObject {
                 ),
                 RssFeed(
                     title: "Vecernji",
-                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
+                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima",
+                    articles: [
+                        Article(
+                            title: "[VIDEO] Raspudići napuštaju Most",
+                            image: nil,
+                            description: "Tragedija hrvatskog naroda"
+                        ),
+                        Article(
+                            title: "Penava: Što rade našoj djeci?",
+                            image: URL(string: "https://picsum.photos/200")!,
+                            description: "Djeca uče arapske brojeve u školi"
+                        ),
+                    ]
                 )
             ]
         }
