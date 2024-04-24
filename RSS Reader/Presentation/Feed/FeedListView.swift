@@ -12,33 +12,35 @@ struct FeedListView: View {
     
     var body: some View {
         List {
-            Text("Your RSS Feeds")
-                .font(.largeTitle)
-            
             ForEach(feeds) { rssFeed in
-                FeedRowView(feed: rssFeed)
+                NavigationLink(value: NavigationDestination.rssFeed) {
+                    FeedRowView(feed: rssFeed)
+                }
             }
         }
         .listStyle(.plain)
+        .navigationTitle("RSS Feeds")
     }
 }
 
 #Preview {
-    FeedListView(
-        feeds: [
-            RssFeed(
-                title: "Slobodna Dalmacija",
-                image: URL(string: "https://picsum.photos/200"),
-                description: "Svježe iz Dalmacije"
-            ),
-            RssFeed(
-                title: "Jutarnji List",
-                description: "RSS Feed Jutarnjeg"
-            ),
-            RssFeed(
-                title: "Vecernji",
-                description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
-            )
-        ]
-    )
+    FeedNavigationWrapper {
+        FeedListView(
+            feeds: [
+                RssFeed(
+                    title: "Slobodna Dalmacija",
+                    image: URL(string: "https://picsum.photos/200"),
+                    description: "Svježe iz Dalmacije"
+                ),
+                RssFeed(
+                    title: "Jutarnji List",
+                    description: "RSS Feed Jutarnjeg"
+                ),
+                RssFeed(
+                    title: "Vecernji",
+                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
+                )
+            ]
+        )
+    }
 }

@@ -9,13 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        FeedNavigationWrapper {
+            FeedListView(
+                feeds: [
+                    RssFeed(
+                        title: "Slobodna Dalmacija",
+                        image: URL(string: "https://picsum.photos/200"),
+                        description: "Svježe iz Dalmacije"
+                    ),
+                    RssFeed(
+                        title: "Jutarnji List",
+                        description: "RSS Feed Jutarnjeg"
+                    ),
+                    RssFeed(
+                        title: "Vecernji",
+                        description: "RSS Feed Vecernjeg Lista s najnovijim vijestima"
+                    )
+                ]
+            )
         }
-        .padding()
     }
 }
 
