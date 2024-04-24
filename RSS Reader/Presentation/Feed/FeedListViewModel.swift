@@ -64,7 +64,7 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func toggleFavoriteIcon(for feed: RssFeed) -> String {
-        feed.isFavorite ? "star" : "star.fill"
+        feed.isFavorite ? Constants.SymbolNames.star : Constants.SymbolNames.starFilled
     }
     
     var deleteActionLabel: String {
@@ -72,7 +72,7 @@ final class FeedListViewModel: ObservableObject {
     }
     
     var deleteActionIcon: String {
-        "trash"
+        Constants.SymbolNames.trash
     }
     
     func onPlusTapped() {

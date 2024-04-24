@@ -44,7 +44,7 @@ struct FeedListView: View {
                 RowView(
                     viewModel: RowViewModel(
                         title: "Ran out of things to read?",
-                        image: .symbol("plus.circle"),
+                        image: .symbol(Constants.SymbolNames.plusInsideCircle),
                         description: "Tap here to add another feed."
                     )
                 )
@@ -65,16 +65,16 @@ struct FeedListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: viewModel.onPlusTapped) {
-                    Image(systemName: "plus")
+                    Image(systemName: Constants.SymbolNames.plus)
                 }
             }
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: viewModel.onStarButtonTapped) {
                     if viewModel.isFilteringFavorites {
-                        Image(systemName: "star.fill")
+                        Image(systemName: Constants.SymbolNames.starFilled)
                     } else {
-                        Image(systemName: "star")
+                        Image(systemName: Constants.SymbolNames.star)
                     }
                 }
             }
