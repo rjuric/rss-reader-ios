@@ -42,6 +42,11 @@ struct NewFeedView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 4))
                 .focused($isFocused)
                 .keyboardType(.URL)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.indigo, lineWidth: 2)
+                }
+                .shadow(color: .indigo, radius: 8)
             
             Spacer()
                 .frame(height: 24)
@@ -63,7 +68,7 @@ struct NewFeedView: View {
                 }
             )
             .buttonStyle(BorderedProminentButtonStyle())
-            .disabled(viewModel.isLoading)
+            .disabled(viewModel.isSubmitDisabled)
         }
         .padding(.horizontal, 20)
         .overlay {
@@ -76,6 +81,7 @@ struct NewFeedView: View {
             sheetHeight = newHeight
         }
         .presentationDetents([.height(sheetHeight)])
+        .contentShape(Rectangle())
         .onTapGesture {
             isFocused = false
         }

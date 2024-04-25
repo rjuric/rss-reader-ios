@@ -1,5 +1,5 @@
 //
-//  RssFeed.swift
+//  Channel.swift
 //  RSS Reader
 //
 //  Created by rjuric on 24.04.2024..
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RssFeed {
+struct Channel {
     let title: String
     var image: URL?
     let description: String
@@ -15,7 +15,7 @@ struct RssFeed {
     var articles: [Article] = []
 }
 
-extension RssFeed: Identifiable {
+extension Channel: Identifiable {
     var id: String {
         title
     }

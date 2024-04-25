@@ -14,16 +14,31 @@ final class NewFeedViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var inputText = ""
     
-    init(isFirstFeed: Bool) {
+    let subscribeToChannel: SubscribeToChannelUseCaseProtocol
+    
+    var isSubmitDisabled: Bool {
+        isLoading || inputText.isEmpty
+    }
+    
+    init(isFirstFeed: Bool, subscribeToChannel: SubscribeToChannelUseCaseProtocol = SubscribeToChannelUseCase()) {
         self.isFirstFeed = isFirstFeed
+        self.subscribeToChannel = subscribeToChannel
     }
     
     func onSubmit() async {
         isLoading = true
         defer { isLoading = false }
         
-        try? await Task.sleep(for: .seconds(2))
+        guard let url = URL(string: inputText) else {
+            return
+        }
         
+        do {
+            try await subscribeToChannel(with: url)
+        } catch {
+            print(error)
+        }
         // TODO: Add persistance and responsiveness
     }
+    
 }

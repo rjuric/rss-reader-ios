@@ -9,20 +9,20 @@ import SwiftUI
 
 @MainActor
 final class FeedListViewModel: ObservableObject {
-    @Published private var rssFeeds: [RssFeed]?
+    @Published private var rssFeeds: [Channel]?
     @Published var isLoading = false
     
     @Published var isFilteringFavorites = false
 
     @Published var isPresentingNewFeed = false
     
-    var filteredFeeds: [RssFeed] {
+    var filteredFeeds: [Channel] {
         guard let rssFeeds else { return [] }
         
         return isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
     }
     
-    func articlesViewModel(for feed: RssFeed) -> ArticlesListViewModel {
+    func articlesViewModel(for feed: Channel) -> ArticlesListViewModel {
         ArticlesListViewModel(
             articles: feed.articles,
             publication: feed.title
@@ -43,13 +43,13 @@ final class FeedListViewModel: ObservableObject {
         }
     }
     
-    func onDelete(_ feed: RssFeed) {
+    func onDelete(_ feed: Channel) {
         rssFeeds?.removeAll(where: { $0.id == feed.id })
         
         // TODO: Persistance
     }
     
-    func onFavorite(_ feed: RssFeed) {
+    func onFavorite(_ feed: Channel) {
         guard let feedIndex = rssFeeds?.firstIndex(where: { $0.id == feed.id }) else {
             return
         }
@@ -59,11 +59,11 @@ final class FeedListViewModel: ObservableObject {
         // TODO: Persistance
     }
     
-    func toggleFavoriteLabel(for feed: RssFeed) -> String {
+    func toggleFavoriteLabel(for feed: Channel) -> String {
         feed.isFavorite ? "Remove from favorites" : "Favorite"
     }
     
-    func toggleFavoriteIcon(for feed: RssFeed) -> String {
+    func toggleFavoriteIcon(for feed: Channel) -> String {
         feed.isFavorite ? Constants.SymbolNames.star : Constants.SymbolNames.starFilled
     }
     
@@ -86,7 +86,7 @@ final class FeedListViewModel: ObservableObject {
         
         withAnimation {
             rssFeeds = [
-                RssFeed(
+                Channel(
                     title: "Slobodna Dalmacija",
                     image: URL(string: "https://picsum.photos/200"),
                     description: "Svježe iz Dalmacije",
@@ -109,11 +109,11 @@ final class FeedListViewModel: ObservableObject {
                         ),
                     ]
                 ),
-                RssFeed(
+                Channel(
                     title: "Jutarnji List",
                     description: "RSS Feed Jutarnjeg"
                 ),
-                RssFeed(
+                Channel(
                     title: "Vecernji",
                     description: "RSS Feed Vecernjeg Lista s najnovijim vijestima",
                     articles: [

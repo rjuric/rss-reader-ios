@@ -19,7 +19,7 @@ struct RowViewModel {
 }
 
 extension RowViewModel {
-    init(from rssFeed: RssFeed) {
+    init(from rssFeed: Channel) {
         title = rssFeed.title
         description = rssFeed.description
         
