@@ -6,9 +6,22 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
 final class FeedListViewModel: ObservableObject {
+    private let getChannelsPublisher: GetChannelsPublisherUseCaseProtocol
+    
+    init(getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase()) {
+        self.getChannelsPublisher = getChannelsPublisher
+    }
+    
+    deinit {
+        channelPublisher?.cancel()
+    }
+    
+    private var channelPublisher: AnyCancellable?
+    
     @Published private var rssFeeds: [Channel]?
     @Published var isLoading = false
     
@@ -134,12 +147,20 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onAppearTask() async {
-        guard rssFeeds.isNil else { return }
+//        guard rssFeeds.isNil else { return }
+//        
+//        isLoading = true
+//        defer { isLoading = false }
+//        
+//        await fetchAndSetRssFeeds()
         
-        isLoading = true
-        defer { isLoading = false }
+        channelPublisher = getChannelsPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] channels in
+                self?.rssFeeds = channels
+            }
         
-        await fetchAndSetRssFeeds()
+        // TODO: Finish this
     }
     
     func onRefreshAction() async {

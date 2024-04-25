@@ -6,16 +6,38 @@
 //
 
 import Foundation
+import Combine
 
 protocol ChannelRepositoryProtocol {
     func subscribeToFeed(with feedUrl: URL) async throws
+    var channelPublisher: AnyPublisher<[Channel], Never> { get }
 }
 
-struct ChannelRepository: ChannelRepositoryProtocol {
-    var remoteDatasource: RemoteChannelDatasourceProtocol = RemoteChannelDatasource()
+final class ChannelRepository: ChannelRepositoryProtocol {
+    private let remoteDatasource: RemoteChannelDatasourceProtocol
+    private let channelSubject: CurrentValueSubject<[Channel]?, Never> = CurrentValueSubject(nil)
+    
+    init(remoteDatasource: RemoteChannelDatasourceProtocol = RemoteChannelDatasource()) {
+        self.remoteDatasource = remoteDatasource
+    }
+    
+    static let shared = ChannelRepository()
     
     func subscribeToFeed(with feedUrl: URL) async throws {
-        _ = try await remoteDatasource.fetch(from: feedUrl)
+        let result = try await remoteDatasource.fetch(from: feedUrl)
+        
+        print(result)
+        
+        var currentValue = channelSubject.value ?? []
+        currentValue.append(result)
+        
+        channelSubject.send(currentValue)
         // TODO: Persistence
+    }
+    
+    var channelPublisher: AnyPublisher<[Channel], Never> {
+        channelSubject
+            .compactMap({ $0 })
+            .eraseToAnyPublisher()
     }
 }

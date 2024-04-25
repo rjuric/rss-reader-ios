@@ -5,7 +5,7 @@
 //  Created by rjuric on 24.04.2024..
 //
 
-import Foundation
+import SwiftUI
 
 @MainActor
 final class NewFeedViewModel: ObservableObject {
@@ -13,6 +13,8 @@ final class NewFeedViewModel: ObservableObject {
     
     @Published var isLoading = false
     @Published var inputText = ""
+    
+    @Published var isError = false
     
     let subscribeToChannel: SubscribeToChannelUseCaseProtocol
     
@@ -25,7 +27,7 @@ final class NewFeedViewModel: ObservableObject {
         self.subscribeToChannel = subscribeToChannel
     }
     
-    func onSubmit() async {
+    func onSubmit(with dismissAction: DismissAction) async {
         isLoading = true
         defer { isLoading = false }
         
@@ -36,9 +38,12 @@ final class NewFeedViewModel: ObservableObject {
         do {
             try await subscribeToChannel(with: url)
         } catch {
-            print(error)
+            print("error")
         }
-        // TODO: Add persistance and responsiveness
+        
+        // TODO: Error handling
+        
+        dismissAction()
     }
     
 }

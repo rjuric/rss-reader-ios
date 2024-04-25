@@ -10,6 +10,8 @@ import SwiftUI
 struct NewFeedView: View {
     @ObservedObject var viewModel: NewFeedViewModel
 
+    @Environment(\.dismiss) private var dismiss
+    
     @FocusState private var isFocused: Bool
     @State private var sheetHeight: CGFloat = .zero
         
@@ -53,8 +55,8 @@ struct NewFeedView: View {
             
             Button(
                 action: {
-                    Task(priority: .userInitiated) {
-                        await viewModel.onSubmit()
+                    Task {
+                        await viewModel.onSubmit(with: dismiss)
                     }
                 }, label: {
                     ZStack {

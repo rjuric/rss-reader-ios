@@ -18,7 +18,7 @@ extension SubscribeToChannelUseCaseProtocol {
 }
 
 struct SubscribeToChannelUseCase: SubscribeToChannelUseCaseProtocol {
-    var channelRepository: ChannelRepositoryProtocol = ChannelRepository()
+    var channelRepository: ChannelRepositoryProtocol = ChannelRepository.shared
     
     func execute(with feedUrl: URL) async throws {
         try await channelRepository.subscribeToFeed(with: feedUrl)
