@@ -1,5 +1,5 @@
 //
-//  RssFeedFetcher.swift
+//  RssFeedService.swift
 //  RSS Reader
 //
 //  Created by rjuric on 25.04.2024..
@@ -8,11 +8,11 @@
 import Foundation
 import FeedKit
 
-protocol RssFeedFetcherProtocol {
+protocol RssFeedServiceProtocol {
     func fetch(from url: URL) async throws -> Feed
 }
 
-struct RssFeedFetcher: RssFeedFetcherProtocol {
+struct RssFeedService: RssFeedServiceProtocol {
     func fetch(from url: URL) async throws -> Feed {
         let parser = FeedParser(URL: url)
         

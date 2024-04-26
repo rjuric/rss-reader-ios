@@ -12,7 +12,7 @@ protocol RemoteChannelDatasourceProtocol {
 }
 
 struct RemoteChannelDatasource: RemoteChannelDatasourceProtocol {
-    var feedFetcher: RssFeedFetcherProtocol = RssFeedFetcher()
+    var feedFetcher: RssFeedServiceProtocol = RssFeedService()
     var channelMapper: FeedToChannelMapperProtocol = FeedToChannelMapper()
     
     func fetch(from feedUrl: URL) async throws -> Channel {
