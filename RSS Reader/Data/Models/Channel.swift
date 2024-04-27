@@ -20,3 +20,5 @@ extension Channel: Identifiable {
         title
     }
 }
+
+extension Channel: Codable {}

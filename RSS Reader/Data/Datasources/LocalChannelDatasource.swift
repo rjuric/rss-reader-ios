@@ -8,34 +8,28 @@
 import Foundation
 
 protocol LocalChannelDatasourceProtocol {
-    func get() throws -> [Channel]
-    func store(_ channel: Channel) throws
-    func update(_ channel: Channel) throws
-    func delete(_ channel: Channel) throws
+    func get() -> [Channel]
+    func store(_ channel: Channel)
+    func update(_ channel: Channel)
+    func delete(_ channel: Channel)
 }
 
 struct LocalChannelDatasource: LocalChannelDatasourceProtocol {
-    var databaseService: DatabaseServiceProtocol = DatabaseService()
-    var channelModelToChannelMapper: ChannelModelToChannelMapperProtocol = ChannelModelToChannelMapper()
-    var channelToChannelModelMapper: ChannelToChannelModelMapperProtocol = ChannelToChannelModelMapper()
+    var databaseService: PersistenceServiceProtocol = PersistenceService()
     
-    func get() throws -> [Channel] {
-        let dbChannels = try databaseService.get(ChannelModel.self)
-        return try dbChannels.map(channelModelToChannelMapper.map)
+    func get() -> [Channel] {
+        databaseService.get()
     }
     
-    func store(_ channel: Channel) throws {
-        let model = channelToChannelModelMapper.map(from: channel)
-        try databaseService.store(model)
+    func store(_ channel: Channel) {
+        databaseService.store(channel)
     }
     
-    func update(_ channel: Channel) throws {
-        let model = channelToChannelModelMapper.map(from: channel)
-        try databaseService.update(model)
+    func update(_ channel: Channel) {
+        databaseService.update(channel)
     }
     
-    func delete(_ channel: Channel) throws {
-        let model = channelToChannelModelMapper.map(from: channel)
-        try databaseService.delete(model)
+    func delete(_ channel: Channel) {
+        databaseService.delete(channel)
     }
 }

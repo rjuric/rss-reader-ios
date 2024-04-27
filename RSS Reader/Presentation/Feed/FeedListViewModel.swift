@@ -11,9 +11,14 @@ import Combine
 @MainActor
 final class FeedListViewModel: ObservableObject {
     private let getChannelsPublisher: GetChannelsPublisherUseCaseProtocol
+    private let initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol
     
-    init(getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase()) {
+    init(
+        getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
+        initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase()
+    ) {
         self.getChannelsPublisher = getChannelsPublisher
+        self.initializeWithStoredChannels = initializeWithStoredChannels
     }
     
     deinit {
@@ -153,6 +158,12 @@ final class FeedListViewModel: ObservableObject {
 //        defer { isLoading = false }
 //        
 //        await fetchAndSetRssFeeds()
+        
+        do {
+            try await initializeWithStoredChannels()
+        } catch {
+            print(error)
+        }
         
         channelPublisher = getChannelsPublisher()
             .receive(on: DispatchQueue.main)

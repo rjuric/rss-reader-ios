@@ -21,3 +21,5 @@ extension Article: Identifiable {
 }
 
 extension Article: Equatable {}
+
+extension Article: Codable {}
