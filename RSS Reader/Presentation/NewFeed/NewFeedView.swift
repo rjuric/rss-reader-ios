@@ -20,24 +20,24 @@ struct NewFeedView: View {
             Spacer()
                 .frame(height: 24)
             
-            Text("Add a new feed")
+            Text("NewFeedView.Title")
                 .font(.title)
             
             Spacer()
                 .frame(height: 32)
             
             if viewModel.isFirstFeed {
-                Text("Before we start...")
+                Text("NewFeedView.Onboarding.Title")
                     .font(.largeTitle)
                 
-                Text("You need to add your first RSS feed.")
+                Text("NewFeedView.Onboarding.Subtitle")
                     .opacity(0.8)
                 
                 Spacer()
                     .frame(height: 24)
             }
             
-            TextField("Tap to enter your URL", text: $viewModel.inputText)
+            TextField("NewFeedView.TextField.Prompt", text: $viewModel.inputText)
                 .padding(8)
                 .background(Material.ultraThin)
                 .foregroundStyle(.foreground)
@@ -64,7 +64,7 @@ struct NewFeedView: View {
                             .progressViewStyle(.circular)
                             .opacity(viewModel.isLoading ? 1 : 0)
                         
-                        Text("Submit")
+                        Text("NewFeedView.Button.Title")
                             .opacity(viewModel.isLoading ? 0 : 1)
                     }
                 }

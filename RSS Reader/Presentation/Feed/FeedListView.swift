@@ -43,9 +43,9 @@ struct FeedListView: View {
             if viewModel.isShowingNewFeedCell {
                 RowView(
                     viewModel: RowViewModel(
-                        title: "Ran out of things to read?",
+                        title: String(localized: "RowView.Empty.Title"),
                         image: .symbol(Constants.SymbolNames.plusInsideCircle),
-                        description: "Tap here to add another feed."
+                        description: String(localized: "RowView.Empty.Description")
                     )
                 )
                 .onTapGesture {
@@ -54,7 +54,7 @@ struct FeedListView: View {
             }
         }
         .listStyle(.plain)
-        .navigationTitle("RSS Feeds")
+        .navigationTitle("FeedListView.Navigation.Title")
         .sheet(isPresented: $viewModel.isPresentingNewFeed) {
             NewFeedView(viewModel: NewFeedViewModel())
         }

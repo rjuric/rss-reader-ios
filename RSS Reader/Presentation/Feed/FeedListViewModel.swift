@@ -84,7 +84,9 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func toggleFavoriteLabel(for feed: Channel) -> String {
-        feed.isFavorite ? "Remove from favorites" : "Favorite"
+        let removeFromFavorites = String(localized: "RowView.ContextMenu.Favorites.Remove")
+        let addToFavorites = String(localized: "RowView.ContextMenu.Favorites.Add")
+        return feed.isFavorite ? removeFromFavorites : addToFavorites
     }
     
     func toggleFavoriteIcon(for feed: Channel) -> String {
@@ -92,7 +94,7 @@ final class FeedListViewModel: ObservableObject {
     }
     
     var deleteActionLabel: String {
-        "Remove from list"
+        String(localized: "RowView.ContextMenu.Delete")
     }
     
     var deleteActionIcon: String {

@@ -29,6 +29,6 @@ struct FeedNavigationWrapper<Content: View>: View {
 
 #Preview {
     FeedNavigationWrapper {
-        Text("Some text here")
+        Text("Placeholder")
     }
 }
