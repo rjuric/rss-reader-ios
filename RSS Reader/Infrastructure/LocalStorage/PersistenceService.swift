@@ -7,29 +7,24 @@
 
 import Foundation
 
-protocol PersistenceServiceProtocol {
-    func store(_ channel: Channel)
-    func get() -> [Channel]
-    func update(_ channel: Channel)
-    func delete(_ channel: Channel)
-}
-
-struct PersistenceService: PersistenceServiceProtocol {
+struct PersistenceService {
     let userDefaults = UserDefaults.standard
     let encoder: JSONEncoder = JSONEncoder()
     let decoder: JSONDecoder = JSONDecoder()
-    
+}
+
+extension PersistenceService: ChannelPersistenceServiceProtocol {
     func store(_ channel: Channel) {
         var channels = get()
         channels.insert(channel, at: 0)
         
         let encoded = try? encoder.encode(channels)
         
-        userDefaults.setValue(encoded, forKey: "com.rjuric.channel-storage")
+        userDefaults.setValue(encoded, forKey: Constants.StorageKeys.channelStorage)
     }
     
     func get() -> [Channel] {
-        let data = userDefaults.data(forKey: "com.rjuric.channel-storage")
+        let data = userDefaults.data(forKey: Constants.StorageKeys.channelStorage)
         
         guard let data, let channels = try? decoder.decode([Channel].self, from: data) else {
             return []
@@ -46,7 +41,7 @@ struct PersistenceService: PersistenceServiceProtocol {
         
         let encoded = try? encoder.encode(channels)
         
-        userDefaults.setValue(encoded, forKey: "com.rjuric.channel-storage")
+        userDefaults.setValue(encoded, forKey: Constants.StorageKeys.channelStorage)
     }
     
     func delete(_ channel: Channel) {
@@ -57,6 +52,22 @@ struct PersistenceService: PersistenceServiceProtocol {
         
         let encoded = try? encoder.encode(channels)
         
-        userDefaults.setValue(encoded, forKey: "com.rjuric.channel-storage")
+        userDefaults.setValue(encoded, forKey: Constants.StorageKeys.channelStorage)
+    }
+}
+
+extension PersistenceService: AppFlagsPersistenceServiceProtocol {
+    func fetch() -> AppFlags? {
+        guard let data = userDefaults.data(forKey: Constants.StorageKeys.appFlagsStorage) else {
+            return nil
+        }
+        
+        return try? decoder.decode(AppFlags.self, from: data)
+    }
+    
+    func save(_ flags: AppFlags) {
+        let encoded = try? encoder.encode(flags)
+        
+        userDefaults.setValue(encoded, forKey: Constants.StorageKeys.appFlagsStorage)
     }
 }

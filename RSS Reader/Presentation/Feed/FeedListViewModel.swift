@@ -14,17 +14,20 @@ final class FeedListViewModel: ObservableObject {
     private let initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol
     private let deleteChannel: UnsubscribeFromChannelUseCaseProtocol
     private let updateChannel: UpdateChanelUseCaseProtocol
+    private let getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol
     
     init(
         getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
         initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase(),
         deleteChannel: UnsubscribeFromChannelUseCaseProtocol = UnsubscribeFromChannelUseCase(),
-        updateChannel: UpdateChanelUseCaseProtocol = UpdateChanelUseCase()
+        updateChannel: UpdateChanelUseCaseProtocol = UpdateChanelUseCase(),
+        getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase()
     ) {
         self.getChannelsPublisher = getChannelsPublisher
         self.initializeWithStoredChannels = initializeWithStoredChannels
         self.deleteChannel = deleteChannel
         self.updateChannel = updateChannel
+        self.getDidShowOnboarding = getDidShowOnboarding
     }
     
     deinit {
@@ -51,10 +54,6 @@ final class FeedListViewModel: ObservableObject {
             articles: feed.articles,
             publication: feed.title
         )
-    }
-    
-    var isFirstFeed: Bool {
-        rssFeeds?.isEmpty == true
     }
     
     var isShowingNewFeedCell: Bool {
@@ -174,6 +173,7 @@ final class FeedListViewModel: ObservableObject {
                 self?.rssFeeds = channels
             }
         
+        isPresentingNewFeed = !getDidShowOnboarding()
         // TODO: Finish this
     }
     

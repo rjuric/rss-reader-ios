@@ -15,7 +15,7 @@ protocol LocalChannelDatasourceProtocol {
 }
 
 struct LocalChannelDatasource: LocalChannelDatasourceProtocol {
-    var databaseService: PersistenceServiceProtocol = PersistenceService()
+    var databaseService: ChannelPersistenceServiceProtocol = PersistenceService()
     
     func get() -> [Channel] {
         databaseService.get()

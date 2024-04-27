@@ -56,11 +56,7 @@ struct FeedListView: View {
         .listStyle(.plain)
         .navigationTitle("RSS Feeds")
         .sheet(isPresented: $viewModel.isPresentingNewFeed) {
-            let isFirstFeed = viewModel.isFirstFeed
-            
-            NewFeedView(viewModel: NewFeedViewModel(isFirstFeed: isFirstFeed))
-                .interactiveDismissDisabled(isFirstFeed)
-                .presentationBackground(Material.ultraThin)
+            NewFeedView(viewModel: NewFeedViewModel())
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

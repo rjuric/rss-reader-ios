@@ -83,6 +83,8 @@ struct NewFeedView: View {
             sheetHeight = newHeight
         }
         .presentationDetents([.height(sheetHeight)])
+        .interactiveDismissDisabled(viewModel.isFirstFeed)
+        .presentationBackground(Material.ultraThin)
         .contentShape(Rectangle())
         .onTapGesture {
             isFocused = false
@@ -93,13 +95,13 @@ struct NewFeedView: View {
 #Preview {
     Text("Placeholder")
         .sheet(isPresented: .constant(true)) {
-            NewFeedView(viewModel: NewFeedViewModel(isFirstFeed: false))
+            NewFeedView(viewModel: NewFeedViewModel())
         }
 }
 
 #Preview {
     Text("Placeholder")
         .sheet(isPresented: .constant(true)) {
-            NewFeedView(viewModel: NewFeedViewModel(isFirstFeed: false))
+            NewFeedView(viewModel: NewFeedViewModel())
         }
 }

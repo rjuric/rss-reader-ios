@@ -21,4 +21,9 @@ enum Constants {
         static let minute = 60
         static let minute15 = 15*minute
     }
+    
+    enum StorageKeys {
+        static let channelStorage = "com.rjuric.channel-storage"
+        static let appFlagsStorage = "com.rjuric.app-flags-storage"
+    }
 }
