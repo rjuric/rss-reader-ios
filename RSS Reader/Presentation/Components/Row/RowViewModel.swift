@@ -11,6 +11,7 @@ struct RowViewModel {
     let title: String
     var image: FeedRowImage?
     let description: String
+    var count = 0
     
     enum FeedRowImage {
         case remote(URL)
@@ -19,9 +20,10 @@ struct RowViewModel {
 }
 
 extension RowViewModel {
-    init(from rssFeed: Channel) {
+    init(from rssFeed: Channel, with newArticleCount: Int) {
         title = rssFeed.title
         description = rssFeed.description
+        count = newArticleCount
         
         guard let imageUrl = rssFeed.image else { return }
         

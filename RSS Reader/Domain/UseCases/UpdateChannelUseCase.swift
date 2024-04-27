@@ -1,5 +1,5 @@
 //
-//  UpdateChanelUseCase.swift
+//  UpdateChannelUseCase.swift
 //  RSS Reader
 //
 //  Created by rjuric on 27.04.2024..
@@ -7,17 +7,17 @@
 
 import Foundation
 
-protocol UpdateChanelUseCaseProtocol {
+protocol UpdateChannelUseCaseProtocol {
     func execute(_ channel: Channel)
 }
 
-extension UpdateChanelUseCaseProtocol {
+extension UpdateChannelUseCaseProtocol {
     func callAsFunction(_ channel: Channel) {
         execute(channel)
     }
 }
 
-struct UpdateChanelUseCase: UpdateChanelUseCaseProtocol {
+struct UpdateChannelUseCase: UpdateChannelUseCaseProtocol {
     var channelRepository: ChannelRepositoryProtocol = ChannelRepository.shared
     
     func execute(_ channel: Channel) {

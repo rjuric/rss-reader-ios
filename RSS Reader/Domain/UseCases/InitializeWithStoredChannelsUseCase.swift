@@ -8,19 +8,19 @@
 import Foundation
 
 protocol InitializeWithStoredChannelsUseCaseProtocol {
-    func execute()
+    func execute() async throws
 }
 
 extension InitializeWithStoredChannelsUseCaseProtocol {
-    func callAsFunction() {
-        execute()
+    func callAsFunction() async throws {
+        try await execute()
     }
 }
 
 struct InitializeWithStoredChannelsUseCase: InitializeWithStoredChannelsUseCaseProtocol {
     var channelRepository: ChannelRepositoryProtocol = ChannelRepository.shared
     
-    func execute() {
-        channelRepository.loadFromLocalStorage()
+    func execute() async throws {
+        try await channelRepository.loadFromLocalStorage()
     }
 }

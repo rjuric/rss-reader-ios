@@ -56,7 +56,7 @@ final class RefreshManager: RefreshManagerProtocol {
         }
         
         Task {
-            await channelRepository?.refresh(channel)
+            try? await channelRepository?.refresh(channel)
         }
     }
 }

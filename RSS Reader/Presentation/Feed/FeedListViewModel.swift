@@ -13,21 +13,24 @@ final class FeedListViewModel: ObservableObject {
     private let getChannelsPublisher: GetChannelsPublisherUseCaseProtocol
     private let initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol
     private let deleteChannel: UnsubscribeFromChannelUseCaseProtocol
-    private let updateChannel: UpdateChanelUseCaseProtocol
+    private let updateChannel: UpdateChannelUseCaseProtocol
     private let getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol
+    private let getNewArticlesCount: GetNewArticlesCountUseCaseProtocol
     
     init(
         getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
         initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase(),
         deleteChannel: UnsubscribeFromChannelUseCaseProtocol = UnsubscribeFromChannelUseCase(),
-        updateChannel: UpdateChanelUseCaseProtocol = UpdateChanelUseCase(),
-        getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase()
+        updateChannel: UpdateChannelUseCaseProtocol = UpdateChannelUseCase(),
+        getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase(),
+        getNewArticlesCount: GetNewArticlesCountUseCaseProtocol = GetNewArticlesCount()
     ) {
         self.getChannelsPublisher = getChannelsPublisher
         self.initializeWithStoredChannels = initializeWithStoredChannels
         self.deleteChannel = deleteChannel
         self.updateChannel = updateChannel
         self.getDidShowOnboarding = getDidShowOnboarding
+        self.getNewArticlesCount = getNewArticlesCount
     }
     
     deinit {
@@ -52,7 +55,8 @@ final class FeedListViewModel: ObservableObject {
     func articlesViewModel(for feed: Channel) -> ArticlesListViewModel {
         ArticlesListViewModel(
             articles: feed.articles,
-            publication: feed.title
+            publication: feed.title,
+            id: feed.id
         )
     }
     
@@ -105,69 +109,16 @@ final class FeedListViewModel: ObservableObject {
         isPresentingNewFeed = true
     }
     
-    private func fetchAndSetRssFeeds() async {
-        try? await Task.sleep(for: .seconds(2))
-        
-        // TODO: Item fetching and persistence
-        
-//        withAnimation {
-//            rssFeeds = [
-//                Channel(
-//                    title: "Slobodna Dalmacija",
-//                    image: URL(string: "https://picsum.photos/200"),
-//                    description: "Svježe iz Dalmacije",
-//                    isFavorite: true,
-//                    articles: [
-//                        Article(
-//                            title: "[ŠOK] Prebio dvojicu ispred Velveta",
-//                            image: URL(string: "https://picsum.photos/200")!,
-//                            description: "Pogledajte što je napravio"
-//                        ),
-//                        Article(
-//                            title: "[VIDEO] Raspudići napuštaju Most",
-//                            image: nil,
-//                            description: "Tragedija hrvatskog naroda"
-//                        ),
-//                        Article(
-//                            title: "Penava: Što rade našoj djeci?",
-//                            image: URL(string: "https://picsum.photos/200")!,
-//                            description: "Djeca uče arapske brojeve u školi"
-//                        ),
-//                    ]
-//                ),
-//                Channel(
-//                    title: "Jutarnji List",
-//                    description: "RSS Feed Jutarnjeg"
-//                ),
-//                Channel(
-//                    title: "Vecernji",
-//                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima",
-//                    articles: [
-//                        Article(
-//                            title: "[VIDEO] Raspudići napuštaju Most",
-//                            image: nil,
-//                            description: "Tragedija hrvatskog naroda"
-//                        ),
-//                        Article(
-//                            title: "Penava: Što rade našoj djeci?",
-//                            image: URL(string: "https://picsum.photos/200")!,
-//                            description: "Djeca uče arapske brojeve u školi"
-//                        ),
-//                    ]
-//                )
-//            ]
-//        }
+    func newArticlesCount(for feed: Channel) -> Int {
+        getNewArticlesCount(for: feed.id)
     }
     
     func onAppearTask() async {
-//        guard rssFeeds.isNil else { return }
-//        
-//        isLoading = true
-//        defer { isLoading = false }
-//        
-//        await fetchAndSetRssFeeds()
-        
-        initializeWithStoredChannels()
+        do {
+            try await initializeWithStoredChannels()
+        } catch {
+            print(error)
+        }
         
         channelPublisher = getChannelsPublisher()
             .receive(on: DispatchQueue.main)
@@ -176,10 +127,9 @@ final class FeedListViewModel: ObservableObject {
             }
         
         isPresentingNewFeed = !getDidShowOnboarding()
-        // TODO: Finish this
     }
     
     func onRefreshAction() async {
-        await fetchAndSetRssFeeds()
+        
     }
 }

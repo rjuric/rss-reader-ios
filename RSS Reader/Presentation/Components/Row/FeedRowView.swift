@@ -25,6 +25,13 @@ struct RowView: View {
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .overlay(alignment: .topTrailing) {
+            if viewModel.count > 0 {
+                NewArticlesCountView(count: viewModel.count)
+                    .padding(.trailing, 4)
+                    .padding(.top, 4)
+            }
+        }
     }
     
     @ViewBuilder

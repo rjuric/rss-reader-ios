@@ -20,6 +20,9 @@ struct ArticlesListView: View {
         }
         .listStyle(.plain)
         .navigationTitle(viewModel.publication.uppercased())
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
 }
 
@@ -44,7 +47,8 @@ struct ArticlesListView: View {
                         description: "Djeca uče arapske brojeve u školi"
                     ),
                 ],
-                publication: "Večernji"
+                publication: "Večernji",
+                id: "Večernji"
             )
         )
     }

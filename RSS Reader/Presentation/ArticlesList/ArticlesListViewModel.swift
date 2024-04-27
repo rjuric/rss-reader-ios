@@ -8,11 +8,22 @@
 import Foundation
 
 struct ArticlesListViewModel {
+    var clearArticleCount: ClearNewArticleCountProtocol = ClearNewArticleCountUseCase()
+    
     let articles: [Article]
     let publication: String
+    let id: String
+    
+    func onAppear() {
+        clearArticleCount(for: id)
+    }
 }
 
-extension ArticlesListViewModel: Equatable {}
+extension ArticlesListViewModel: Equatable {
+    static func == (lhs: ArticlesListViewModel, rhs: ArticlesListViewModel) -> Bool {
+        lhs.publication == rhs.publication && lhs.articles == rhs.articles
+    }
+}
 
 extension ArticlesListViewModel: Hashable {
     func hash(into hasher: inout Hasher) {

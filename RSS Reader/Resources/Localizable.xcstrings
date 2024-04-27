@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld" : {
+
+    },
     "FeedListView.Navigation.Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -124,9 +127,6 @@
           }
         }
       }
-    },
-    "Some text here" : {
-
     }
   },
   "version" : "1.0"

@@ -17,8 +17,10 @@ struct FeedListView: View {
                     viewModel.articlesViewModel(for: rssFeed)
                 )
                 
+                let newArticlesCount = viewModel.newArticlesCount(for: rssFeed)
+                
                 NavigationLink(value: destination) {
-                    RowView(viewModel: RowViewModel(from: rssFeed))
+                    RowView(viewModel: RowViewModel(from: rssFeed, with: newArticlesCount))
                 }
                 .contextMenu {
                     Button(
