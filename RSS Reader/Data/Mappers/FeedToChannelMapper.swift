@@ -9,13 +9,13 @@ import Foundation
 import FeedKit
 
 protocol FeedToChannelMapperProtocol {
-    func map(feed: Feed) throws -> Channel
+    func map(feed: Feed, with url: URL) throws -> Channel
 }
 
 struct FeedToChannelMapper: FeedToChannelMapperProtocol {
     var articleMapper: ItemToArticleMapperProtocol = ItemToArticleMapper()
     
-    func map(feed: Feed) throws -> Channel {
+    func map(feed: Feed, with url: URL) throws -> Channel {
         guard let rssFeed = feed.rssFeed else { throw RssReaderError.wrongFeedFormat }
         
         guard let title = rssFeed.title, let description = rssFeed.description else {
@@ -34,7 +34,8 @@ struct FeedToChannelMapper: FeedToChannelMapperProtocol {
             image: imageUrl,
             description: description,
             isFavorite: false,
-            articles: articles
+            articles: articles,
+            url: url
         )
         
         // TODO: cleanup

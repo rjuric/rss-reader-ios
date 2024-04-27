@@ -13,6 +13,7 @@ struct Channel {
     let description: String
     var isFavorite: Bool = false
     var articles: [Article] = []
+    var url: URL
 }
 
 extension Channel: Identifiable {

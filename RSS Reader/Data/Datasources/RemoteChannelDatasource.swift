@@ -17,7 +17,7 @@ struct RemoteChannelDatasource: RemoteChannelDatasourceProtocol {
     
     func fetch(from feedUrl: URL) async throws -> Channel {
         let feed = try await feedFetcher.fetch(from: feedUrl)
-        let channel = try channelMapper.map(feed: feed)
+        let channel = try channelMapper.map(feed: feed, with: feedUrl)
         
         return channel
     }

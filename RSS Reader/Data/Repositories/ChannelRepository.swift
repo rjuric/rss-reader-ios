@@ -8,11 +8,12 @@
 import Foundation
 import Combine
 
-protocol ChannelRepositoryProtocol {
+protocol ChannelRepositoryProtocol: AnyObject {
     func loadFromLocalStorage()
     func subscribeToFeed(with feedUrl: URL) async throws
     func remove(_ channel: Channel)
     func update(_ channel: Channel)
+    func refresh(_ channel: Channel) async
     var channelPublisher: AnyPublisher<[Channel], Never> { get }
 }
 
@@ -20,21 +21,28 @@ final class ChannelRepository: ChannelRepositoryProtocol {
     private let remoteDatasource: RemoteChannelDatasourceProtocol
     private let localDatasource: LocalChannelDatasourceProtocol
     private let channelSubject: CurrentValueSubject<[Channel]?, Never> = CurrentValueSubject(nil)
+    private var refreshManager: RefreshManagerProtocol
     
     init(
         remoteDatasource: RemoteChannelDatasourceProtocol = RemoteChannelDatasource(),
-        localDatasource: LocalChannelDatasourceProtocol = LocalChannelDatasource()
+        localDatasource: LocalChannelDatasourceProtocol = LocalChannelDatasource(),
+        refreshManager: RefreshManagerProtocol = RefreshManager()
     ) {
         self.remoteDatasource = remoteDatasource
         self.localDatasource = localDatasource
+        self.refreshManager = refreshManager
+        
+        self.refreshManager.channelRepository = self
     }
     
     static let shared = ChannelRepository()
     
     func loadFromLocalStorage() {
-        let result = localDatasource.get()
+        let channels = localDatasource.get()
         
-        channelSubject.send(result)
+        refreshManager.registerAll(channels)
+        
+        channelSubject.send(channels)
     }
     
     func subscribeToFeed(with feedUrl: URL) async throws {
@@ -42,6 +50,9 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         
         localDatasource.store(channel)
         let result = localDatasource.get()
+        
+        refreshManager.register(channel)
+        
         channelSubject.send(result)
     }
     
@@ -55,6 +66,14 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         localDatasource.update(channel)
         let result = localDatasource.get()
         channelSubject.send(result)
+    }
+    
+    func refresh(_ channel: Channel) async {
+        guard let updatedChannel = try? await remoteDatasource.fetch(from: channel.url) else {
+            return
+        }
+        
+        update(updatedChannel)
     }
     
     var channelPublisher: AnyPublisher<[Channel], Never> {

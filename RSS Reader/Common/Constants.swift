@@ -16,4 +16,9 @@ enum Constants {
         static let trash = "trash"
         static let safari = "safari"
     }
+    
+    enum TimeIntervals {
+        static let minute = 60
+        static let minute15 = 15*minute
+    }
 }

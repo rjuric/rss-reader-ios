@@ -77,7 +77,8 @@ final class FeedListViewModel: ObservableObject {
             image: channel.image,
             description: channel.description,
             isFavorite: !channel.isFavorite,
-            articles: channel.articles
+            articles: channel.articles,
+            url: channel.url
         )
         
         updateChannel(updated)
@@ -108,53 +109,53 @@ final class FeedListViewModel: ObservableObject {
         
         // TODO: Item fetching and persistence
         
-        withAnimation {
-            rssFeeds = [
-                Channel(
-                    title: "Slobodna Dalmacija",
-                    image: URL(string: "https://picsum.photos/200"),
-                    description: "Svježe iz Dalmacije",
-                    isFavorite: true,
-                    articles: [
-                        Article(
-                            title: "[ŠOK] Prebio dvojicu ispred Velveta",
-                            image: URL(string: "https://picsum.photos/200")!,
-                            description: "Pogledajte što je napravio"
-                        ),
-                        Article(
-                            title: "[VIDEO] Raspudići napuštaju Most",
-                            image: nil,
-                            description: "Tragedija hrvatskog naroda"
-                        ),
-                        Article(
-                            title: "Penava: Što rade našoj djeci?",
-                            image: URL(string: "https://picsum.photos/200")!,
-                            description: "Djeca uče arapske brojeve u školi"
-                        ),
-                    ]
-                ),
-                Channel(
-                    title: "Jutarnji List",
-                    description: "RSS Feed Jutarnjeg"
-                ),
-                Channel(
-                    title: "Vecernji",
-                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima",
-                    articles: [
-                        Article(
-                            title: "[VIDEO] Raspudići napuštaju Most",
-                            image: nil,
-                            description: "Tragedija hrvatskog naroda"
-                        ),
-                        Article(
-                            title: "Penava: Što rade našoj djeci?",
-                            image: URL(string: "https://picsum.photos/200")!,
-                            description: "Djeca uče arapske brojeve u školi"
-                        ),
-                    ]
-                )
-            ]
-        }
+//        withAnimation {
+//            rssFeeds = [
+//                Channel(
+//                    title: "Slobodna Dalmacija",
+//                    image: URL(string: "https://picsum.photos/200"),
+//                    description: "Svježe iz Dalmacije",
+//                    isFavorite: true,
+//                    articles: [
+//                        Article(
+//                            title: "[ŠOK] Prebio dvojicu ispred Velveta",
+//                            image: URL(string: "https://picsum.photos/200")!,
+//                            description: "Pogledajte što je napravio"
+//                        ),
+//                        Article(
+//                            title: "[VIDEO] Raspudići napuštaju Most",
+//                            image: nil,
+//                            description: "Tragedija hrvatskog naroda"
+//                        ),
+//                        Article(
+//                            title: "Penava: Što rade našoj djeci?",
+//                            image: URL(string: "https://picsum.photos/200")!,
+//                            description: "Djeca uče arapske brojeve u školi"
+//                        ),
+//                    ]
+//                ),
+//                Channel(
+//                    title: "Jutarnji List",
+//                    description: "RSS Feed Jutarnjeg"
+//                ),
+//                Channel(
+//                    title: "Vecernji",
+//                    description: "RSS Feed Vecernjeg Lista s najnovijim vijestima",
+//                    articles: [
+//                        Article(
+//                            title: "[VIDEO] Raspudići napuštaju Most",
+//                            image: nil,
+//                            description: "Tragedija hrvatskog naroda"
+//                        ),
+//                        Article(
+//                            title: "Penava: Što rade našoj djeci?",
+//                            image: URL(string: "https://picsum.photos/200")!,
+//                            description: "Djeca uče arapske brojeve u školi"
+//                        ),
+//                    ]
+//                )
+//            ]
+//        }
     }
     
     func onAppearTask() async {
@@ -165,11 +166,7 @@ final class FeedListViewModel: ObservableObject {
 //        
 //        await fetchAndSetRssFeeds()
         
-        do {
-            try await initializeWithStoredChannels()
-        } catch {
-            print(error)
-        }
+        initializeWithStoredChannels()
         
         channelPublisher = getChannelsPublisher()
             .receive(on: DispatchQueue.main)
