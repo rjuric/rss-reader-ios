@@ -54,11 +54,8 @@ struct NewFeedView: View {
                 .frame(height: 24)
             
             Button(
-                action: {
-                    Task {
-                        await viewModel.onSubmit(with: dismiss)
-                    }
-                }, label: {
+                action: submit,
+                label: {
                     ZStack {
                         ProgressView()
                             .progressViewStyle(.circular)
@@ -84,10 +81,27 @@ struct NewFeedView: View {
         }
         .presentationDetents([.height(sheetHeight)])
         .interactiveDismissDisabled(viewModel.isFirstFeed)
-        .presentationBackground(Material.ultraThin)
+        .presentationBackground(Material.thick)
         .contentShape(Rectangle())
         .onTapGesture {
             isFocused = false
+        }
+        .alert(
+            "NewFeedView.Error.Title",
+            isPresented: $viewModel.isError,
+            actions: {
+                Button("Common.Retry", action: submit)
+                Button("Common.Cancel", action: viewModel.cancel)
+            },
+            message: {
+                Text("NewFeedView.Error.Description")
+            }
+        )
+    }
+    
+    private func submit() {
+        Task {
+            await viewModel.onSubmit(with: dismiss)
         }
     }
 }

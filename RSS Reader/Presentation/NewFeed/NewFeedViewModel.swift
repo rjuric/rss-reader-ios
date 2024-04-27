@@ -11,7 +11,6 @@ import SwiftUI
 final class NewFeedViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var inputText = ""
-    
     @Published var isError = false
     
     private let subscribeToChannel: SubscribeToChannelUseCaseProtocol
@@ -20,7 +19,19 @@ final class NewFeedViewModel: ObservableObject {
     private let setAppFlags: SetAppFlagsUseCaseProtocol
     
     var isSubmitDisabled: Bool {
-        isLoading || inputText.isEmpty
+        isLoading || inputText.isEmpty || !isValidUrl
+    }
+    
+    private var isValidUrl: Bool {
+        guard let url = URL(string: inputText) else { return false }
+        
+        guard let scheme = url.scheme,
+              scheme == "https" || scheme == "http" 
+        else {
+            return false
+        }
+        
+        return true
     }
     
     init(
@@ -48,7 +59,8 @@ final class NewFeedViewModel: ObservableObject {
         do {
             try await subscribeToChannel(with: url)
         } catch {
-            print(error)
+            isError = true
+            return
         }
         
         var appFlags = getAppFlags()
@@ -65,8 +77,15 @@ final class NewFeedViewModel: ObservableObject {
         
         setAppFlags(appFlags)
         dismissAction()
+    }
+    
+    func cancel() {
+        isError = false
+        inputText = ""
+    }
+    
+    func retry() {
         
-        // TODO: Error handling
     }
     
 }

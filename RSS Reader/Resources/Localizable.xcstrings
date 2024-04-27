@@ -4,6 +4,28 @@
     "%lld" : {
 
     },
+    "Common.Cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "Common.Retry" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again"
+          }
+        }
+      }
+    },
     "FeedListView.Navigation.Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -22,6 +44,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Submit"
+          }
+        }
+      }
+    },
+    "NewFeedView.Error.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check that you posted a valid URL. Try again at a later time."
+          }
+        }
+      }
+    },
+    "NewFeedView.Error.Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong."
           }
         }
       }
