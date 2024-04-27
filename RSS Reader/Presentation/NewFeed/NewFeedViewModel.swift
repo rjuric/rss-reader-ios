@@ -38,7 +38,7 @@ final class NewFeedViewModel: ObservableObject {
         do {
             try await subscribeToChannel(with: url)
         } catch {
-            print("error")
+            print(error)
         }
         
         // TODO: Error handling

@@ -31,6 +31,8 @@
 		6C3CBAAF2BDBCAD500CA13A9 /* DatabaseMappingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBAAE2BDBCAD500CA13A9 /* DatabaseMappingError.swift */; };
 		6C3CBAB52BDBD4E500CA13A9 /* InitializeWithStoredChannelsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBAB42BDBD4E500CA13A9 /* InitializeWithStoredChannelsUseCase.swift */; };
 		6C3CBAB72BDCEDA800CA13A9 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBAB62BDCEDA800CA13A9 /* PersistenceService.swift */; };
+		6C3CBAB92BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBAB82BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift */; };
+		6C3CBABB2BDCF88400CA13A9 /* UpdateChanelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBABA2BDCF88400CA13A9 /* UpdateChanelUseCase.swift */; };
 		6CEB86712BD9401100CD6B48 /* RSS_ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */; };
 		6CEB86732BD9401100CD6B48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB86722BD9401100CD6B48 /* ContentView.swift */; };
 		6CEB86752BD9401200CD6B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CEB86742BD9401200CD6B48 /* Assets.xcassets */; };
@@ -83,6 +85,8 @@
 		6C3CBAAE2BDBCAD500CA13A9 /* DatabaseMappingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseMappingError.swift; sourceTree = "<group>"; };
 		6C3CBAB42BDBD4E500CA13A9 /* InitializeWithStoredChannelsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializeWithStoredChannelsUseCase.swift; sourceTree = "<group>"; };
 		6C3CBAB62BDCEDA800CA13A9 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		6C3CBAB82BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsubscribeFromChannelUseCase.swift; sourceTree = "<group>"; };
+		6C3CBABA2BDCF88400CA13A9 /* UpdateChanelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChanelUseCase.swift; sourceTree = "<group>"; };
 		6CEB866D2BD9401100CD6B48 /* RSS Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CEB86702BD9401100CD6B48 /* RSS_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSS_ReaderApp.swift; sourceTree = "<group>"; };
 		6CEB86722BD9401100CD6B48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				6C3CBA962BDAEA7C00CA13A9 /* SubscribeToChannelUseCase.swift */,
 				6C3CBA982BDAF0B500CA13A9 /* GetChannelsPublisherUseCase.swift */,
 				6C3CBAB42BDBD4E500CA13A9 /* InitializeWithStoredChannelsUseCase.swift */,
+				6C3CBAB82BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift */,
+				6C3CBABA2BDCF88400CA13A9 /* UpdateChanelUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				6C3CBA8A2BDACFFD00CA13A9 /* RssReaderError.swift in Sources */,
 				6C3CBA932BDAE89C00CA13A9 /* String+isValidUrlString.swift in Sources */,
 				6CEB86AF2BD94D9A00CD6B48 /* FeedListViewModel.swift in Sources */,
+				6C3CBAB92BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift in Sources */,
 				6C3CBA8E2BDAD46600CA13A9 /* RemoteChannelDatasource.swift in Sources */,
 				6C3CBA992BDAF0B500CA13A9 /* GetChannelsPublisherUseCase.swift in Sources */,
 				6CEB86A02BD941AE00CD6B48 /* FeedRowView.swift in Sources */,
@@ -526,6 +533,7 @@
 				6C3CBA672BD9953F00CA13A9 /* ArticlesListView.swift in Sources */,
 				6C3CBA702BD99CE000CA13A9 /* ArticleView.swift in Sources */,
 				6CEB86732BD9401100CD6B48 /* ContentView.swift in Sources */,
+				6C3CBABB2BDCF88400CA13A9 /* UpdateChanelUseCase.swift in Sources */,
 				6CEB86AA2BD949D400CD6B48 /* FeedNavigationViewModel.swift in Sources */,
 				6C3CBA972BDAEA7C00CA13A9 /* SubscribeToChannelUseCase.swift in Sources */,
 				6CEB86A22BD9453F00CD6B48 /* FeedListView.swift in Sources */,

@@ -11,6 +11,8 @@ import Combine
 protocol ChannelRepositoryProtocol {
     func loadFromLocalStorage()
     func subscribeToFeed(with feedUrl: URL) async throws
+    func remove(_ channel: Channel)
+    func update(_ channel: Channel)
     var channelPublisher: AnyPublisher<[Channel], Never> { get }
 }
 
@@ -36,14 +38,23 @@ final class ChannelRepository: ChannelRepositoryProtocol {
     }
     
     func subscribeToFeed(with feedUrl: URL) async throws {
-        let result = try await remoteDatasource.fetch(from: feedUrl)
+        let channel = try await remoteDatasource.fetch(from: feedUrl)
         
-        localDatasource.store(result)
-        
-        var currentValue = channelSubject.value ?? []
-        currentValue.append(result)
-        
-        channelSubject.send(currentValue)
+        localDatasource.store(channel)
+        let result = localDatasource.get()
+        channelSubject.send(result)
+    }
+    
+    func remove(_ channel: Channel) {
+        localDatasource.delete(channel)
+        let result = localDatasource.get()
+        channelSubject.send(result)
+    }
+    
+    func update(_ channel: Channel) {
+        localDatasource.update(channel)
+        let result = localDatasource.get()
+        channelSubject.send(result)
     }
     
     var channelPublisher: AnyPublisher<[Channel], Never> {

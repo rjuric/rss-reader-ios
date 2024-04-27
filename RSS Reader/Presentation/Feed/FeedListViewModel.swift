@@ -12,13 +12,19 @@ import Combine
 final class FeedListViewModel: ObservableObject {
     private let getChannelsPublisher: GetChannelsPublisherUseCaseProtocol
     private let initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol
+    private let deleteChannel: UnsubscribeFromChannelUseCaseProtocol
+    private let updateChannel: UpdateChanelUseCaseProtocol
     
     init(
         getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
-        initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase()
+        initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase(),
+        deleteChannel: UnsubscribeFromChannelUseCaseProtocol = UnsubscribeFromChannelUseCase(),
+        updateChannel: UpdateChanelUseCaseProtocol = UpdateChanelUseCase()
     ) {
         self.getChannelsPublisher = getChannelsPublisher
         self.initializeWithStoredChannels = initializeWithStoredChannels
+        self.deleteChannel = deleteChannel
+        self.updateChannel = updateChannel
     }
     
     deinit {
@@ -61,20 +67,20 @@ final class FeedListViewModel: ObservableObject {
         }
     }
     
-    func onDelete(_ feed: Channel) {
-        rssFeeds?.removeAll(where: { $0.id == feed.id })
-        
-        // TODO: Persistance
+    func onDelete(_ channel: Channel) {
+        deleteChannel(channel)
     }
     
-    func onFavorite(_ feed: Channel) {
-        guard let feedIndex = rssFeeds?.firstIndex(where: { $0.id == feed.id }) else {
-            return
-        }
+    func onFavorite(_ channel: Channel) {
+        let updated = Channel(
+            title: channel.title,
+            image: channel.image,
+            description: channel.description,
+            isFavorite: !channel.isFavorite,
+            articles: channel.articles
+        )
         
-        rssFeeds?[feedIndex].isFavorite.toggle()
-        
-        // TODO: Persistance
+        updateChannel(updated)
     }
     
     func toggleFavoriteLabel(for feed: Channel) -> String {
