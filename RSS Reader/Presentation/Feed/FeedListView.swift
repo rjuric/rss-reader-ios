@@ -79,7 +79,19 @@ struct FeedListView: View {
         }
         .task { await viewModel.onAppearTask() }
         .refreshable { await viewModel.onRefreshAction() }
-        .isLoading(viewModel.isLoading)
+        .alert(
+            "Common.Error.Title",
+            isPresented: $viewModel.isError,
+            actions: {
+                Button("Common.Retry") {
+                    Task { await viewModel.onAppearTask() }
+                }
+                Button("Common.Cancel", action: {})
+            },
+            message: {
+                Text("Common.Error.Description")
+            }
+        )
     }
 }
 

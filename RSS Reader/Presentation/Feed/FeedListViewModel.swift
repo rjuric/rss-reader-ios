@@ -40,11 +40,9 @@ final class FeedListViewModel: ObservableObject {
     private var channelPublisher: AnyCancellable?
     
     @Published private var rssFeeds: [Channel]?
-    @Published var isLoading = false
-    
     @Published var isFilteringFavorites = false
-
     @Published var isPresentingNewFeed = false
+    @Published var isError = false
     
     var filteredFeeds: [Channel] {
         guard let rssFeeds else { return [] }
@@ -117,7 +115,7 @@ final class FeedListViewModel: ObservableObject {
         do {
             try await initializeWithStoredChannels()
         } catch {
-            print(error)
+            isError = true
         }
         
         channelPublisher = getChannelsPublisher()

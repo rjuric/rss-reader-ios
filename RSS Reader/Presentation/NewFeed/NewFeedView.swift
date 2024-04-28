@@ -87,14 +87,14 @@ struct NewFeedView: View {
             isFocused = false
         }
         .alert(
-            "NewFeedView.Error.Title",
+            "Common.Error.Title",
             isPresented: $viewModel.isError,
             actions: {
                 Button("Common.Retry", action: submit)
                 Button("Common.Cancel", action: viewModel.cancel)
             },
             message: {
-                Text("NewFeedView.Error.Description")
+                Text("Common.Error.Description")
             }
         )
     }

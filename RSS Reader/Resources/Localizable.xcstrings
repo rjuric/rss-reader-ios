@@ -15,6 +15,28 @@
         }
       }
     },
+    "Common.Error.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please check that you posted a valid URL. Try again at a later time."
+          }
+        }
+      }
+    },
+    "Common.Error.Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong."
+          }
+        }
+      }
+    },
     "Common.Retry" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -44,28 +66,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Submit"
-          }
-        }
-      }
-    },
-    "NewFeedView.Error.Description" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please check that you posted a valid URL. Try again at a later time."
-          }
-        }
-      }
-    },
-    "NewFeedView.Error.Title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Something went wrong."
           }
         }
       }
