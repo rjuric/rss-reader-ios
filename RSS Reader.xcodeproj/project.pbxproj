@@ -25,7 +25,6 @@
 		6C3CBA8A2BDACFFD00CA13A9 /* RssReaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA892BDACFFD00CA13A9 /* RssReaderError.swift */; };
 		6C3CBA8E2BDAD46600CA13A9 /* RemoteChannelDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA8D2BDAD46600CA13A9 /* RemoteChannelDatasource.swift */; };
 		6C3CBA912BDAD62300CA13A9 /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA902BDAD62300CA13A9 /* ChannelRepository.swift */; };
-		6C3CBA932BDAE89C00CA13A9 /* String+isValidUrlString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA922BDAE89C00CA13A9 /* String+isValidUrlString.swift */; };
 		6C3CBA972BDAEA7C00CA13A9 /* SubscribeToChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA962BDAEA7C00CA13A9 /* SubscribeToChannelUseCase.swift */; };
 		6C3CBA992BDAF0B500CA13A9 /* GetChannelsPublisherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBA982BDAF0B500CA13A9 /* GetChannelsPublisherUseCase.swift */; };
 		6C3CBAA82BDBC3CA00CA13A9 /* LocalChannelDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3CBAA72BDBC3CA00CA13A9 /* LocalChannelDatasource.swift */; };
@@ -91,7 +90,6 @@
 		6C3CBA892BDACFFD00CA13A9 /* RssReaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssReaderError.swift; sourceTree = "<group>"; };
 		6C3CBA8D2BDAD46600CA13A9 /* RemoteChannelDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChannelDatasource.swift; sourceTree = "<group>"; };
 		6C3CBA902BDAD62300CA13A9 /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
-		6C3CBA922BDAE89C00CA13A9 /* String+isValidUrlString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isValidUrlString.swift"; sourceTree = "<group>"; };
 		6C3CBA962BDAEA7C00CA13A9 /* SubscribeToChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeToChannelUseCase.swift; sourceTree = "<group>"; };
 		6C3CBA982BDAF0B500CA13A9 /* GetChannelsPublisherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetChannelsPublisherUseCase.swift; sourceTree = "<group>"; };
 		6C3CBAA72BDBC3CA00CA13A9 /* LocalChannelDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalChannelDatasource.swift; sourceTree = "<group>"; };
@@ -445,7 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				6CEB86B62BD9646F00CD6B48 /* Optional+isNil.swift */,
-				6C3CBA922BDAE89C00CA13A9 /* String+isValidUrlString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -566,7 +563,6 @@
 				6C3CBAB52BDBD4E500CA13A9 /* InitializeWithStoredChannelsUseCase.swift in Sources */,
 				6C3CBA692BD9956C00CA13A9 /* Article.swift in Sources */,
 				6C3CBA8A2BDACFFD00CA13A9 /* RssReaderError.swift in Sources */,
-				6C3CBA932BDAE89C00CA13A9 /* String+isValidUrlString.swift in Sources */,
 				6C92DD1C2BDD39AA0076C596 /* AppFlagsPersistenceService.swift in Sources */,
 				6CEB86AF2BD94D9A00CD6B48 /* FeedListViewModel.swift in Sources */,
 				6C3CBAB92BDCF76400CA13A9 /* UnsubscribeFromChannelUseCase.swift in Sources */,

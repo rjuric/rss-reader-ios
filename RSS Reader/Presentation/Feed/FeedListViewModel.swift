@@ -112,6 +112,8 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onAppearTask() async {
+        guard rssFeeds.isNil else { return }
+        
         do {
             try await initializeWithStoredChannels()
         } catch {
