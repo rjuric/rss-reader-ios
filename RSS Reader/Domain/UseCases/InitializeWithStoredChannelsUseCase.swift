@@ -24,3 +24,9 @@ struct InitializeWithStoredChannelsUseCase: InitializeWithStoredChannelsUseCaseP
         try await channelRepository.loadFromLocalStorage()
     }
 }
+
+#if DEBUG
+struct PreviewInitializeWithStoredChannelsUseCase: InitializeWithStoredChannelsUseCaseProtocol {
+    func execute() async throws { }
+}
+#endif

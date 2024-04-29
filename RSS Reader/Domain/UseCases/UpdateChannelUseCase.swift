@@ -24,3 +24,9 @@ struct UpdateChannelUseCase: UpdateChannelUseCaseProtocol {
         channelRepository.update(channel)
     }
 }
+
+#if DEBUG
+struct PreviewUpdateChannelUseCase: UpdateChannelUseCaseProtocol {
+    func execute(_ channel: Channel) { }
+}
+#endif

@@ -25,3 +25,13 @@ struct GetChannelsPublisherUseCase: GetChannelsPublisherUseCaseProtocol {
         channelRepository.channelPublisher
     }
 }
+
+#if DEBUG
+struct PreviewGetChannelsPublisherUseCase: GetChannelsPublisherUseCaseProtocol {
+    var publisher: AnyPublisher<[Channel], Never> = CurrentValueSubject<[Channel], Never>([]).eraseToAnyPublisher()
+    
+    func execute() -> AnyPublisher<[Channel], Never> {
+        publisher
+    }
+}
+#endif

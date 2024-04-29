@@ -24,3 +24,9 @@ struct UnsubscribeFromChannelUseCase: UnsubscribeFromChannelUseCaseProtocol {
         channelRepository.remove(channel)
     }
 }
+
+#if DEBUG
+struct PreviewUnsubscribeFromChannelUseCase: UnsubscribeFromChannelUseCaseProtocol {
+    func execute(_ channel: Channel) { }
+}
+#endif

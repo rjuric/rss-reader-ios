@@ -24,3 +24,12 @@ struct GetNewArticlesCount: GetNewArticlesCountUseCaseProtocol {
         channelRepository.getNewArticlesCount(for: channelId)
     }
 }
+
+#if DEBUG
+struct PreviewGetNewArticlesCount: GetNewArticlesCountUseCaseProtocol {
+    var returnValue: Int
+    func execute(for channelId: String) -> Int {
+        returnValue
+    }
+}
+#endif
