@@ -26,7 +26,7 @@ final class NewFeedViewModel: ObservableObject {
         guard let url = URL(string: inputText) else { return false }
         
         guard let scheme = url.scheme,
-              scheme == "https" || scheme == "http" 
+              scheme == Constants.SupportedUrlSchemes.https || scheme == Constants.SupportedUrlSchemes.http
         else {
             return false
         }

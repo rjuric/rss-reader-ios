@@ -26,4 +26,15 @@ enum Constants {
         static let channelStorage = "com.rjuric.channel-storage"
         static let appFlagsStorage = "com.rjuric.app-flags-storage"
     }
+    
+    enum SupportedMediaTypes {
+        static let png = "image/png"
+        static let jpg = "image/jpeg"
+        static let bmp = "image/bmp"
+    }
+    
+    enum SupportedUrlSchemes {
+        static let http = "http"
+        static let https = "https"
+    }
 }
