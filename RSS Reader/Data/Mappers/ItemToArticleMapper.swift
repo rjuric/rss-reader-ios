@@ -22,13 +22,18 @@ struct ItemToArticleMapper: ItemToArticleMapperProtocol {
             throw RssReaderError.wrongFeedFormat
         }
         
+        var imageUrl: URL?
+        if ["image/png", "image/bmp", "image/jpeg"].contains(where: { item.enclosure?.attributes?.type == $0 }),
+           let imageUrlString = item.enclosure?.attributes?.url
+        {
+            imageUrl = URL(string: imageUrlString)
+        }
+        
         return Article(
             title: title,
-            image: nil,
+            image: imageUrl,
             description: description,
             url: url
         )
-        
-        // TODO: figure out image
     }
 }

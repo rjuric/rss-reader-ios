@@ -1,5 +1,5 @@
 //
-//  RssFeedRepository.swift
+//  ChannelRepository.swift
 //  RSS Reader
 //
 //  Created by rjuric on 25.04.2024..
@@ -67,7 +67,7 @@ final class ChannelRepository: ChannelRepositoryProtocol {
     }
     
     func subscribeToFeed(with feedUrl: URL) async throws {
-        guard channelsCache.contains(where: { $0.url == feedUrl }) else { return }
+        guard !channelsCache.contains(where: { $0.url == feedUrl }) else { return }
         
         let channel = try await remoteDatasource.fetch(from: feedUrl)
         

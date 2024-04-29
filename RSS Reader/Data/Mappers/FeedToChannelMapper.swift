@@ -37,7 +37,5 @@ struct FeedToChannelMapper: FeedToChannelMapperProtocol {
             articles: articles,
             url: url
         )
-        
-        // TODO: cleanup
     }
 }
