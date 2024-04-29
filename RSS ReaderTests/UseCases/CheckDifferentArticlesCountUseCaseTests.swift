@@ -1,5 +1,5 @@
 //
-//  CheckDifferentArticlesCountUseCaseProtocol.swift
+//  CheckDifferentArticlesCountUseCaseTests.swift
 //  RSS ReaderTests
 //
 //  Created by rjuric on 29.04.2024..
@@ -8,7 +8,7 @@
 import XCTest
 @testable import RSS_Reader
 
-final class CheckDifferentArticlesCountUseCaseProtocol: XCTestCase {
+final class CheckDifferentArticlesCountUseCaseTests: XCTestCase {
     var sut: CheckDifferentArticlesCountUseCase!
     
     override func setUpWithError() throws {
