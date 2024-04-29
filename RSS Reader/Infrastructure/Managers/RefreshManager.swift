@@ -17,7 +17,7 @@ protocol RefreshManagerProtocol {
 
 final class RefreshManager: RefreshManagerProtocol {
     weak var channelRepository: ChannelRepositoryProtocol?
-    
+
     private var timers: [String: Timer] = [:]
     private var timerInterval: TimeInterval {
         #if DEBUG
@@ -32,14 +32,17 @@ final class RefreshManager: RefreshManagerProtocol {
     }
     
     func register(_ channel: Channel) {
-        let timer = Timer.scheduledTimer(
-            timeInterval: timerInterval,
-            target: self,
-            selector: #selector(onTimerFire),
-            userInfo: ["channel": channel],
-            repeats: true
-        )
-        timers[channel.id] = timer
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            let timer = Timer.scheduledTimer(
+                timeInterval: timerInterval,
+                target: self,
+                selector: #selector(onTimerFire),
+                userInfo: ["channel": channel],
+                repeats: true
+            )
+            timers[channel.id] = timer
+        }
     }
     
     func unregister(_ channel: Channel) {

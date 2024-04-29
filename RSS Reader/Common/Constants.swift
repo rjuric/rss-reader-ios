@@ -37,4 +37,8 @@ enum Constants {
         static let http = "http"
         static let https = "https"
     }
+    
+    enum BackgroundFetchTasks {
+        static let refresh = "com.juricroko.background.refresh"
+    }
 }

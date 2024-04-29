@@ -46,7 +46,7 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         self.refreshManager.channelRepository = self
     }
     
-    static let shared = ChannelRepository()
+    static let shared: ChannelRepositoryProtocol = ChannelRepository()
     
     func loadFromLocalStorage() async throws {
         let channels = localDatasource.get()

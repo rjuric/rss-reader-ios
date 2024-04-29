@@ -283,6 +283,7 @@
 		6C3CBA942BDAEA5B00CA13A9 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				6C92DD3C2BDFDF090076C596 /* BackgroundRefresh */,
 				6C3CBA952BDAEA6A00CA13A9 /* UseCases */,
 			);
 			path = Domain;
@@ -325,6 +326,13 @@
 				6C3CBAAE2BDBCAD500CA13A9 /* DatabaseMappingError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		6C92DD3C2BDFDF090076C596 /* BackgroundRefresh */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BackgroundRefresh;
 			sourceTree = "<group>";
 		};
 		6CEB86642BD9401100CD6B48 = {
