@@ -114,6 +114,28 @@
         }
       }
     },
+    "Notifications.Body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are new articles from your favorite feeds."
+          }
+        }
+      }
+    },
+    "Notifications.Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New articles available."
+          }
+        }
+      }
+    },
     "Placeholder" : {
 
     },

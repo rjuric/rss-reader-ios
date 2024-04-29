@@ -19,6 +19,7 @@ protocol ChannelRepositoryProtocol: AnyObject {
     func clearNewArticlesCount(for channelId: String)
     var channelPublisher: AnyPublisher<[Channel], Never> { get }
     var articleCountPublisher: AnyPublisher<[String: Int], Never> { get }
+    var articleDifference: [String: Int] { get }
 }
 
 final class ChannelRepository: ChannelRepositoryProtocol {

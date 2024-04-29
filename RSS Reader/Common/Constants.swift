@@ -38,7 +38,8 @@ enum Constants {
         static let https = "https"
     }
     
-    enum BackgroundFetchTasks {
+    enum Identifiers {
         static let refresh = "com.juricroko.background.refresh"
+        static let notification = "com.juricroko.background.notification"
     }
 }

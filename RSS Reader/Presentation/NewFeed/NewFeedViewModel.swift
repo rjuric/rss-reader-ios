@@ -17,6 +17,7 @@ final class NewFeedViewModel: ObservableObject {
     private let getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol
     private let getAppFlags: GetAppFlagsUseCaseProtocol
     private let setAppFlags: SetAppFlagsUseCaseProtocol
+    private let requestNotificationsAuthorization: RequestNotificationAuthorizationUseCaseProtocol
     
     var isSubmitDisabled: Bool {
         isLoading || inputText.isEmpty || !isValidUrl
@@ -38,12 +39,14 @@ final class NewFeedViewModel: ObservableObject {
         subscribeToChannel: SubscribeToChannelUseCaseProtocol = SubscribeToChannelUseCase(),
         getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase(),
         getAppFlags: GetAppFlagsUseCaseProtocol = GetAppFlagsUseCase(),
-        setAppFlags: SetAppFlagsUseCaseProtocol = SetAppFlagsUseCase()
+        setAppFlags: SetAppFlagsUseCaseProtocol = SetAppFlagsUseCase(),
+        requestNotificationAuthorization: RequestNotificationAuthorizationUseCaseProtocol = RequestNotificationAuthorizationUseCase()
     ) {
         self.subscribeToChannel = subscribeToChannel
         self.getDidShowOnboarding = getDidShowOnboarding
         self.setAppFlags = setAppFlags
         self.getAppFlags = getAppFlags
+        self.requestNotificationsAuthorization = requestNotificationAuthorization
     }
     
     lazy var isFirstFeed: Bool = !getDidShowOnboarding()
@@ -62,6 +65,8 @@ final class NewFeedViewModel: ObservableObject {
             isError = true
             return
         }
+        
+        await requestNotificationsAuthorization()
         
         var appFlags = getAppFlags()
         if appFlags.isNil {

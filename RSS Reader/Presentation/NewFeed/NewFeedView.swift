@@ -111,6 +111,7 @@ struct NewFeedView: View {
     let getDidShowOnboardingUC = PreviewGetDidShowOnboardingUseCase(returnValue: true)
     let getAppFlagsUC = PreviewGetAppFlagsUseCase(returnValue: nil)
     let setAppFlagsUC = PreviewSetAppFlagsUseCase()
+    let requestAuthorizationUC = PreviewRequestNotificationAuthorizationUseCase()
     
     return Text("Placeholder")
         .sheet(isPresented: .constant(true)) {
@@ -119,7 +120,8 @@ struct NewFeedView: View {
                     subscribeToChannel: subscribeToChannelUC,
                     getDidShowOnboarding: getDidShowOnboardingUC,
                     getAppFlags: getAppFlagsUC,
-                    setAppFlags: setAppFlagsUC
+                    setAppFlags: setAppFlagsUC,
+                    requestNotificationAuthorization: requestAuthorizationUC
                 )
             )
         }
