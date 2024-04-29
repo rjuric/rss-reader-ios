@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct FeedNavigationWrapper<Content: View>: View {
+    @ObservedObject var viewModel: FeedNavigationViewModel
     @ViewBuilder var content: Content
-    
-    @StateObject var viewModel = FeedNavigationViewModel()
     
     var body: some View {
         NavigationStack(path: $viewModel.path) {
@@ -28,7 +27,11 @@ struct FeedNavigationWrapper<Content: View>: View {
 }
 
 #Preview {
-    FeedNavigationWrapper {
+    FeedNavigationWrapper(
+        viewModel: FeedNavigationViewModel(
+            feedListViewModel: FeedListViewModel()
+        )
+    ) {
         Text("Placeholder")
     }
 }

@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        FeedNavigationWrapper {
-            FeedListView()
+        let feedListViewModel = FeedListViewModel()
+        let viewModel = FeedNavigationViewModel(feedListViewModel: feedListViewModel)
+        
+        FeedNavigationWrapper(viewModel: viewModel) {
+            FeedListView(viewModel: feedListViewModel)
         }
     }
 }

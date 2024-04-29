@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeedListView: View {
-    @StateObject private var viewModel = FeedListViewModel()
+    @ObservedObject var viewModel: FeedListViewModel
     
     var body: some View {
         List {
@@ -96,7 +96,15 @@ struct FeedListView: View {
 }
 
 #Preview {
-    FeedNavigationWrapper {
-        FeedListView()
+    struct Content: View {
+        @StateObject private var viewModel = FeedNavigationViewModel(feedListViewModel: FeedListViewModel())
+        
+        var body: some View {
+            FeedNavigationWrapper(viewModel: viewModel) {
+                FeedListView(viewModel: viewModel.feedListViewModel)
+            }
+        }
     }
+    
+    return Content()
 }
