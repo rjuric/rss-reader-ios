@@ -25,7 +25,7 @@ struct ShouldShowNotificationUseCase: ShouldShowNotificationUseCaseProtocol {
         try await channelRepository.refreshAllChannels()
         let differencesAfter = channelRepository.articleDifference
         
-        var differentKey = differencesAfter.keys.first { key in
+        let differentKey = differencesAfter.keys.first { key in
             differencesBefore[key] != differencesAfter[key]
         }
         
