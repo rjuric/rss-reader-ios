@@ -14,6 +14,7 @@ protocol ChannelRepositoryProtocol: AnyObject {
     func remove(_ channel: Channel)
     func update(_ channel: Channel)
     func refresh(_ channel: Channel) async throws
+    func refreshAllChannels() async throws
     func getNewArticlesCount(for channelId: String) -> Int
     func clearNewArticlesCount(for channelId: String)
     var channelPublisher: AnyPublisher<[Channel], Never> { get }
@@ -60,7 +61,17 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         }
     }
     
+    func refreshAllChannels() async throws {
+        let channels = localDatasource.get()
+        try await refreshChannels(channels)
+    }
+    
     func subscribeToFeed(with feedUrl: URL) async throws {
+        let channels = localDatasource.get()
+        guard !channels.contains(where: { $0.url == feedUrl }) else {
+            return
+        }
+        
         let channel = try await remoteDatasource.fetch(from: feedUrl)
         
         localDatasource.store(channel)

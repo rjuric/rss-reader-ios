@@ -16,6 +16,7 @@ final class FeedListViewModel: ObservableObject {
     private let updateChannel: UpdateChannelUseCaseProtocol
     private let getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol
     private let getNewArticlesCount: GetNewArticlesCountUseCaseProtocol
+    private let refreshAllChannels: RefreshAllChannelsUseCaseProtocol
     
     init(
         getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
@@ -23,7 +24,8 @@ final class FeedListViewModel: ObservableObject {
         deleteChannel: UnsubscribeFromChannelUseCaseProtocol = UnsubscribeFromChannelUseCase(),
         updateChannel: UpdateChannelUseCaseProtocol = UpdateChannelUseCase(),
         getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase(),
-        getNewArticlesCount: GetNewArticlesCountUseCaseProtocol = GetNewArticlesCount()
+        getNewArticlesCount: GetNewArticlesCountUseCaseProtocol = GetNewArticlesCount(),
+        refreshAllChannels: RefreshAllChannelsUseCaseProtocol = RefreshAllChannelsUseCase()
     ) {
         self.getChannelsPublisher = getChannelsPublisher
         self.initializeWithStoredChannels = initializeWithStoredChannels
@@ -31,6 +33,7 @@ final class FeedListViewModel: ObservableObject {
         self.updateChannel = updateChannel
         self.getDidShowOnboarding = getDidShowOnboarding
         self.getNewArticlesCount = getNewArticlesCount
+        self.refreshAllChannels = refreshAllChannels
     }
     
     deinit {
@@ -130,6 +133,10 @@ final class FeedListViewModel: ObservableObject {
     }
     
     func onRefreshAction() async {
-        
+        do {
+            try await refreshAllChannels()
+        } catch {
+            isError = true
+        }
     }
 }

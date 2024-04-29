@@ -29,7 +29,15 @@ struct FeedNavigationWrapper<Content: View>: View {
 #Preview {
     FeedNavigationWrapper(
         viewModel: FeedNavigationViewModel(
-            feedListViewModel: FeedListViewModel()
+            feedListViewModel: FeedListViewModel(
+                getChannelsPublisher: PreviewGetChannelsPublisherUseCase(),
+                initializeWithStoredChannels: PreviewInitializeWithStoredChannelsUseCase(),
+                deleteChannel: PreviewUnsubscribeFromChannelUseCase(),
+                updateChannel: PreviewUpdateChannelUseCase(),
+                getDidShowOnboarding: PreviewGetDidShowOnboardingUseCase(returnValue: false),
+                getNewArticlesCount: PreviewGetNewArticlesCount(returnValue: 3),
+                refreshAllChannels: PreviewRefreshAllChannelsUseCase(isErroring: false)
+            )
         )
     ) {
         Text("Placeholder")

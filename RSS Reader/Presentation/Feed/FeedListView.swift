@@ -104,7 +104,8 @@ struct FeedListView: View {
                 deleteChannel: PreviewUnsubscribeFromChannelUseCase(),
                 updateChannel: PreviewUpdateChannelUseCase(),
                 getDidShowOnboarding: PreviewGetDidShowOnboardingUseCase(returnValue: false),
-                getNewArticlesCount: PreviewGetNewArticlesCount(returnValue: 3)
+                getNewArticlesCount: PreviewGetNewArticlesCount(returnValue: 3),
+                refreshAllChannels: PreviewRefreshAllChannelsUseCase(isErroring: false)
             )
         )
         
