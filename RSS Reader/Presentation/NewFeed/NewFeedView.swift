@@ -107,15 +107,20 @@ struct NewFeedView: View {
 }
 
 #Preview {
-    Text("Placeholder")
+    let subscribeToChannelUC = PreviewSubscribeToChannelUseCase(isErroring: false)
+    let getDidShowOnboardingUC = PreviewGetDidShowOnboardingUseCase(returnValue: true)
+    let getAppFlagsUC = PreviewGetAppFlagsUseCase(returnValue: nil)
+    let setAppFlagsUC = PreviewSetAppFlagsUseCase()
+    
+    return Text("Placeholder")
         .sheet(isPresented: .constant(true)) {
-            NewFeedView(viewModel: NewFeedViewModel())
-        }
-}
-
-#Preview {
-    Text("Placeholder")
-        .sheet(isPresented: .constant(true)) {
-            NewFeedView(viewModel: NewFeedViewModel())
+            NewFeedView(
+                viewModel: NewFeedViewModel(
+                    subscribeToChannel: subscribeToChannelUC,
+                    getDidShowOnboarding: getDidShowOnboardingUC,
+                    getAppFlags: getAppFlagsUC,
+                    setAppFlags: setAppFlagsUC
+                )
+            )
         }
 }

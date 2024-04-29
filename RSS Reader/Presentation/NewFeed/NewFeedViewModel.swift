@@ -83,9 +83,4 @@ final class NewFeedViewModel: ObservableObject {
         isError = false
         inputText = ""
     }
-    
-    func retry() {
-        
-    }
-    
 }

@@ -26,3 +26,13 @@ struct GetDidShowOnboardingUseCase: GetDidShowOnboardingUseCaseProtocol {
         return flags?.didShowOnboarding == true
     }
 }
+
+#if DEBUG
+struct PreviewGetDidShowOnboardingUseCase: GetDidShowOnboardingUseCaseProtocol {
+    var returnValue: Bool
+    
+    func execute() -> Bool {
+        returnValue
+    }
+}
+#endif

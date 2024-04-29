@@ -24,3 +24,13 @@ struct GetAppFlagsUseCase: GetAppFlagsUseCaseProtocol {
         persistenceService.fetch()
     }
 }
+
+#if DEBUG
+struct PreviewGetAppFlagsUseCase: GetAppFlagsUseCaseProtocol {
+    var returnValue: AppFlags?
+    
+    func execute() -> AppFlags? {
+        returnValue
+    }
+}
+#endif

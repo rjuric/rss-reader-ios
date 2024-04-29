@@ -24,3 +24,15 @@ struct SubscribeToChannelUseCase: SubscribeToChannelUseCaseProtocol {
         try await channelRepository.subscribeToFeed(with: feedUrl)
     }
 }
+
+#if DEBUG
+struct PreviewSubscribeToChannelUseCase: SubscribeToChannelUseCaseProtocol {
+    let isErroring: Bool
+    
+    func execute(with feedUrl: URL) async throws {
+        guard isErroring else { return }
+        
+        throw RssReaderError.wrongFeedFormat
+    }
+}
+#endif

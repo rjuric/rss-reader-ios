@@ -24,3 +24,9 @@ struct SetAppFlagsUseCase: SetAppFlagsUseCaseProtocol {
         persistenceService.save(flags)
     }
 }
+
+#if DEBUG
+struct PreviewSetAppFlagsUseCase: SetAppFlagsUseCaseProtocol {
+    func execute(_ flags: AppFlags) { }
+}
+#endif
