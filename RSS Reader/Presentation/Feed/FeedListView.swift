@@ -12,29 +12,32 @@ struct FeedListView: View {
     
     var body: some View {
         List {
-            ForEach(viewModel.filteredFeeds) { rssFeed in
+            ForEach(viewModel.filteredChannels) { articleCountChannel in
                 let destination = NavigationDestination.feedArticles(
-                    viewModel.articlesViewModel(for: rssFeed)
+                    viewModel.articlesViewModel(for: articleCountChannel.channel)
                 )
                 
-                let newArticlesCount = viewModel.newArticlesCount(for: rssFeed)
-                
                 NavigationLink(value: destination) {
-                    RowView(viewModel: RowViewModel(from: rssFeed, with: newArticlesCount))
+                    RowView(
+                        viewModel: RowViewModel(
+                            from: articleCountChannel.channel,
+                            with: articleCountChannel.articleCount
+                        )
+                    )
                 }
                 .contextMenu {
                     Button(
-                        action: { viewModel.onFavorite(rssFeed) },
+                        action: { viewModel.onFavorite(articleCountChannel.channel) },
                         label: {
-                            let favoriteTitle = viewModel.toggleFavoriteLabel(for: rssFeed)
-                            let favoriteIcon = viewModel.toggleFavoriteIcon(for: rssFeed)
+                            let favoriteTitle = viewModel.toggleFavoriteLabel(for: articleCountChannel.channel)
+                            let favoriteIcon = viewModel.toggleFavoriteIcon(for: articleCountChannel.channel)
                             
                             Label(favoriteTitle, systemImage: favoriteIcon)
                         }
                     )
                     Button(
                         role: .destructive,
-                        action: { viewModel.onDelete(rssFeed) },
+                        action: { viewModel.onDelete(articleCountChannel.channel) },
                         label: {
                             Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
                         }
@@ -99,12 +102,11 @@ struct FeedListView: View {
     struct Content: View {
         @StateObject private var viewModel = FeedNavigationViewModel(
             feedListViewModel: FeedListViewModel(
-                getChannelsPublisher: PreviewGetChannelsPublisherUseCase(),
+                getChannelsAndNewArticleCountPublisher: PreviewGetChannelAndNewArticleCountPublisherUseCase(),
                 initializeWithStoredChannels: PreviewInitializeWithStoredChannelsUseCase(),
                 deleteChannel: PreviewUnsubscribeFromChannelUseCase(),
                 updateChannel: PreviewUpdateChannelUseCase(),
                 getDidShowOnboarding: PreviewGetDidShowOnboardingUseCase(returnValue: false),
-                getNewArticlesCount: PreviewGetNewArticlesCount(returnValue: 3),
                 refreshAllChannels: PreviewRefreshAllChannelsUseCase(isErroring: false)
             )
         )

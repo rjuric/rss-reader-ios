@@ -18,7 +18,7 @@ struct Channel {
 
 extension Channel: Identifiable {
     var id: String {
-        title
+        url.absoluteString
     }
 }
 

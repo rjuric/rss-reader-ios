@@ -30,12 +30,11 @@ struct FeedNavigationWrapper<Content: View>: View {
     FeedNavigationWrapper(
         viewModel: FeedNavigationViewModel(
             feedListViewModel: FeedListViewModel(
-                getChannelsPublisher: PreviewGetChannelsPublisherUseCase(),
+                getChannelsAndNewArticleCountPublisher: PreviewGetChannelAndNewArticleCountPublisherUseCase(),
                 initializeWithStoredChannels: PreviewInitializeWithStoredChannelsUseCase(),
                 deleteChannel: PreviewUnsubscribeFromChannelUseCase(),
                 updateChannel: PreviewUpdateChannelUseCase(),
                 getDidShowOnboarding: PreviewGetDidShowOnboardingUseCase(returnValue: false),
-                getNewArticlesCount: PreviewGetNewArticlesCount(returnValue: 3),
                 refreshAllChannels: PreviewRefreshAllChannelsUseCase(isErroring: false)
             )
         )

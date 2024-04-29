@@ -10,59 +10,56 @@ import Combine
 
 @MainActor
 final class FeedListViewModel: ObservableObject {
-    private let getChannelsPublisher: GetChannelsPublisherUseCaseProtocol
+    private let getChannelsAndNewArticleCountPublisher: GetChannelAndNewArticleCountPublisherUseCaseProtocol
     private let initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol
     private let deleteChannel: UnsubscribeFromChannelUseCaseProtocol
     private let updateChannel: UpdateChannelUseCaseProtocol
     private let getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol
-    private let getNewArticlesCount: GetNewArticlesCountUseCaseProtocol
     private let refreshAllChannels: RefreshAllChannelsUseCaseProtocol
     
     init(
-        getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase(),
+        getChannelsAndNewArticleCountPublisher: GetChannelAndNewArticleCountPublisherUseCaseProtocol = GetChannelAndNewArticleCountPublisherUseCase(),
         initializeWithStoredChannels: InitializeWithStoredChannelsUseCaseProtocol = InitializeWithStoredChannelsUseCase(),
         deleteChannel: UnsubscribeFromChannelUseCaseProtocol = UnsubscribeFromChannelUseCase(),
         updateChannel: UpdateChannelUseCaseProtocol = UpdateChannelUseCase(),
         getDidShowOnboarding: GetDidShowOnboardingUseCaseProtocol = GetDidShowOnboardingUseCase(),
-        getNewArticlesCount: GetNewArticlesCountUseCaseProtocol = GetNewArticlesCount(),
         refreshAllChannels: RefreshAllChannelsUseCaseProtocol = RefreshAllChannelsUseCase()
     ) {
-        self.getChannelsPublisher = getChannelsPublisher
+        self.getChannelsAndNewArticleCountPublisher = getChannelsAndNewArticleCountPublisher
         self.initializeWithStoredChannels = initializeWithStoredChannels
         self.deleteChannel = deleteChannel
         self.updateChannel = updateChannel
         self.getDidShowOnboarding = getDidShowOnboarding
-        self.getNewArticlesCount = getNewArticlesCount
         self.refreshAllChannels = refreshAllChannels
     }
     
     deinit {
-        channelPublisher?.cancel()
+        articleCountChannelPublisher?.cancel()
     }
     
-    private var channelPublisher: AnyCancellable?
+    private var articleCountChannelPublisher: AnyCancellable?
     
-    @Published private var rssFeeds: [Channel]?
+    @Published private var channels: [ArticleCountChannel]?
     @Published var isFilteringFavorites = false
     @Published var isPresentingNewFeed = false
     @Published var isError = false
     
-    var filteredFeeds: [Channel] {
-        guard let rssFeeds else { return [] }
+    var filteredChannels: [ArticleCountChannel] {
+        guard let channels else { return [] }
         
-        return isFilteringFavorites ? rssFeeds.filter({ $0.isFavorite }) : rssFeeds
+        return isFilteringFavorites ? channels.filter({ $0.channel.isFavorite }) : channels
     }
     
-    func articlesViewModel(for feed: Channel) -> ArticlesListViewModel {
+    func articlesViewModel(for channel: Channel) -> ArticlesListViewModel {
         ArticlesListViewModel(
-            articles: feed.articles,
-            publication: feed.title,
-            id: feed.id
+            articles: channel.articles,
+            publication: channel.title,
+            id: channel.id
         )
     }
     
     var isShowingNewFeedCell: Bool {
-        !rssFeeds.isNil
+        !channels.isNil
     }
     
     func onStarButtonTapped() {
@@ -110,12 +107,8 @@ final class FeedListViewModel: ObservableObject {
         isPresentingNewFeed = true
     }
     
-    func newArticlesCount(for feed: Channel) -> Int {
-        getNewArticlesCount(for: feed.id)
-    }
-    
     func onAppearTask() async {
-        guard rssFeeds.isNil else { return }
+        guard channels.isNil else { return }
         
         do {
             try await initializeWithStoredChannels()
@@ -123,10 +116,10 @@ final class FeedListViewModel: ObservableObject {
             isError = true
         }
         
-        channelPublisher = getChannelsPublisher()
+        articleCountChannelPublisher = getChannelsAndNewArticleCountPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] channels in
-                self?.rssFeeds = channels
+                self?.channels = channels
             }
         
         isPresentingNewFeed = !getDidShowOnboarding()
