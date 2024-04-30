@@ -69,7 +69,7 @@ final class ChannelRepository: ChannelRepositoryProtocol {
     func subscribeToFeed(with feedUrl: URL) async throws {
         guard !channelsCache.contains(where: { $0.url == feedUrl }) else { return }
         
-        let channel = try await remoteDatasource.fetch(from: feedUrl)
+        let channel = try await remoteDatasource.fetch(from: feedUrl, isFavorite: false)
         
         localDatasource.store(channel)
         refreshManager.register(channel)
@@ -95,7 +95,7 @@ final class ChannelRepository: ChannelRepositoryProtocol {
     }
     
     func refresh(_ channel: Channel) async throws {
-        let updatedChannel = try await remoteDatasource.fetch(from: channel.url)
+        let updatedChannel = try await remoteDatasource.fetch(from: channel.url, isFavorite: channel.isFavorite)
         update(updatedChannel)
         
         let differenceCount = checkDifferentArticlesCount(from: channel.articles, to: updatedChannel.articles)

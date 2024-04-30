@@ -16,7 +16,7 @@ struct NewArticlesCountView: View {
         Text("\(count)")
             .foregroundStyle(Color.white)
             .font(.caption)
-            .padding(4)
+            .padding(6)
             .background(Color.indigo)
             .clipShape(Circle())
     }

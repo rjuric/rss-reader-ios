@@ -17,6 +17,10 @@ struct ArticlesListViewModel {
     func onAppear() {
         clearArticleCount(for: id)
     }
+    
+    var navigationTitle: String {
+        publication.uppercased()
+    }
 }
 
 extension ArticlesListViewModel: Equatable {

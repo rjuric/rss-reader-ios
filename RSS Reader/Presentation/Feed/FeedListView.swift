@@ -11,54 +11,62 @@ struct FeedListView: View {
     @ObservedObject var viewModel: FeedListViewModel
     
     var body: some View {
-        List {
-            ForEach(viewModel.filteredChannels) { articleCountChannel in
-                let destination = NavigationDestination.feedArticles(
-                    viewModel.articlesViewModel(for: articleCountChannel.channel)
-                )
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.filteredChannels) { articleCountChannel in
+                    let destination = NavigationDestination.feedArticles(
+                        viewModel.articlesViewModel(for: articleCountChannel.channel)
+                    )
+                    
+                    NavigationLink(value: destination) {
+                        RowView(
+                            viewModel: RowViewModel(
+                                from: articleCountChannel.channel,
+                                with: articleCountChannel.articleCount
+                            )
+                        )
+                    }
+                    .contextMenu {
+                        Button(
+                            action: { viewModel.onFavorite(articleCountChannel.channel) },
+                            label: {
+                                let favoriteTitle = viewModel.toggleFavoriteLabel(for: articleCountChannel.channel)
+                                let favoriteIcon = viewModel.toggleFavoriteIcon(for: articleCountChannel.channel)
+                                
+                                Label(favoriteTitle, systemImage: favoriteIcon)
+                            }
+                        )
+                        Button(
+                            role: .destructive,
+                            action: { viewModel.onDelete(articleCountChannel.channel) },
+                            label: {
+                                Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
+                            }
+                        )
+                    }
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+                    
+                    Divider()
+                        .overlay(Color.primary)
+                        .padding(.horizontal, 16)
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
                 
-                NavigationLink(value: destination) {
+                if viewModel.isShowingNewFeedCell {
                     RowView(
                         viewModel: RowViewModel(
-                            from: articleCountChannel.channel,
-                            with: articleCountChannel.articleCount
+                            title: String(localized: "RowView.Empty.Title"),
+                            image: .symbol(Constants.SymbolNames.plusInsideCircle),
+                            description: String(localized: "RowView.Empty.Description")
                         )
                     )
-                }
-                .contextMenu {
-                    Button(
-                        action: { viewModel.onFavorite(articleCountChannel.channel) },
-                        label: {
-                            let favoriteTitle = viewModel.toggleFavoriteLabel(for: articleCountChannel.channel)
-                            let favoriteIcon = viewModel.toggleFavoriteIcon(for: articleCountChannel.channel)
-                            
-                            Label(favoriteTitle, systemImage: favoriteIcon)
-                        }
-                    )
-                    Button(
-                        role: .destructive,
-                        action: { viewModel.onDelete(articleCountChannel.channel) },
-                        label: {
-                            Label(viewModel.deleteActionLabel, systemImage: viewModel.deleteActionIcon)
-                        }
-                    )
+                    .onTapGesture {
+                        viewModel.onPlusTapped()
+                    }
                 }
             }
-            
-            if viewModel.isShowingNewFeedCell {
-                RowView(
-                    viewModel: RowViewModel(
-                        title: String(localized: "RowView.Empty.Title"),
-                        image: .symbol(Constants.SymbolNames.plusInsideCircle),
-                        description: String(localized: "RowView.Empty.Description")
-                    )
-                )
-                .onTapGesture {
-                    viewModel.onPlusTapped()
-                }
-            }
+            .animation(.bouncy, value: viewModel.isFilteringFavorites)
         }
-        .listStyle(.plain)
         .navigationTitle("FeedListView.Navigation.Title")
         .sheet(isPresented: $viewModel.isPresentingNewFeed) {
             NewFeedView(viewModel: NewFeedViewModel())

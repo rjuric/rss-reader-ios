@@ -11,15 +11,20 @@ struct ArticlesListView: View {
     let viewModel: ArticlesListViewModel
     
     var body: some View {
-        List {
-            ForEach(viewModel.articles) { article in
-                NavigationLink(value: NavigationDestination.article(ArticleViewModel(from: article))) {
-                    RowView(viewModel: RowViewModel(from: article))
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.articles) { article in
+                    NavigationLink(value: NavigationDestination.article(ArticleViewModel(from: article))) {
+                        RowView(viewModel: RowViewModel(from: article))
+                    }
+                    
+                    Divider()
+                        .overlay(Color.primary)
+                        .padding(.horizontal, 16)
                 }
             }
         }
-        .listStyle(.plain)
-        .navigationTitle(viewModel.publication.uppercased())
+        .navigationTitle(viewModel.navigationTitle)
         .onAppear {
             viewModel.onAppear()
         }

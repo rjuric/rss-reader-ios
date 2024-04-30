@@ -15,6 +15,7 @@ enum Constants {
         static let starFilled = "star.fill"
         static let trash = "trash"
         static let safari = "safari"
+        static let chevronRight = "chevron.forward"
     }
     
     enum TimeIntervals {
