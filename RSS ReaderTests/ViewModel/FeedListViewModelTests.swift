@@ -12,13 +12,13 @@ import Combine
 @MainActor
 final class FeedListViewModelTests: XCTestCase {
     var sut: FeedListViewModel!
-    var repository: ChannelRepositoryStub!
+    var repository: ChannelRepositoryMock!
     var appFlagsService: AppFlagsPersistenceServiceStub!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        repository = ChannelRepositoryStub()
+        repository = ChannelRepositoryMock()
         appFlagsService = AppFlagsPersistenceServiceStub()
         
         sut = FeedListViewModel(

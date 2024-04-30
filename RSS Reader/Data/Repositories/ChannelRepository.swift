@@ -15,7 +15,6 @@ protocol ChannelRepositoryProtocol: AnyObject {
     func update(_ channel: Channel)
     func refresh(_ channel: Channel) async throws
     func refreshAllChannels() async throws
-    func getNewArticlesCount(for channelId: String) -> Int
     func clearNewArticlesCount(for channelId: String)
     var channelPublisher: AnyPublisher<[Channel], Never> { get }
     var articleCountPublisher: AnyPublisher<[String: Int], Never> { get }
@@ -73,24 +72,26 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         let channel = try await remoteDatasource.fetch(from: feedUrl)
         
         localDatasource.store(channel)
-        let result = localDatasource.get()
-        
         refreshManager.register(channel)
         
-        channelsCache = result
+        channelsCache.insert(channel, at: 0)
     }
     
     func remove(_ channel: Channel) {
         localDatasource.delete(channel)
-        let result = localDatasource.get()
-        channelsCache = result
+        channelsCache = channelsCache.filter({ $0.id != channel.id })
+        refreshManager.unregister(channel)
         articleDifference.removeValue(forKey: channel.id)
     }
     
     func update(_ channel: Channel) {
         localDatasource.update(channel)
-        let result = localDatasource.get()
-        channelsCache = result
+        
+        guard let index = channelsCache.firstIndex(where: { $0.id == channel.id }) else {
+            return
+        }
+        
+        channelsCache[index] = channel
     }
     
     func refresh(_ channel: Channel) async throws {
@@ -99,10 +100,6 @@ final class ChannelRepository: ChannelRepositoryProtocol {
         
         let differenceCount = checkDifferentArticlesCount(from: channel.articles, to: updatedChannel.articles)
         articleDifference[channel.id] = differenceCount
-    }
-    
-    func getNewArticlesCount(for channelId: String) -> Int {
-        articleDifference[channelId] ?? 0
     }
     
     func clearNewArticlesCount(for channelId: String) {

@@ -1,5 +1,5 @@
 //
-//  ChannelRepositoryStub.swift
+//  ChannelRepositoryMock.swift
 //  RSS ReaderTests
 //
 //  Created by rjuric on 30.04.2024..
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 @testable import RSS_Reader
 
-final class ChannelRepositoryStub: ChannelRepositoryProtocol {
+final class ChannelRepositoryMock: ChannelRepositoryProtocol {
     var updateCalledWith: [Channel] = []
     var updateCalled: Bool {
         !updateCalledWith.isEmpty
@@ -56,15 +56,6 @@ final class ChannelRepositoryStub: ChannelRepositoryProtocol {
     }
     func refresh(_ channel: Channel) async throws {
         refreshCalledWith.append(channel)
-    }
-    
-    var getNewArticlesCountCalledWith: [String] = []
-    var getNewArticlesCountCalled: Bool {
-        !getNewArticlesCountCalledWith.isEmpty
-    }
-    func getNewArticlesCount(for channelId: String) -> Int {
-        getNewArticlesCountCalledWith.append(channelId)
-        return 0
     }
     
     var clearNewArticlesCountCalledWith: [String] = []

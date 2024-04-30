@@ -10,11 +10,11 @@ import XCTest
 
 final class ArticlesListViewModelTests: XCTestCase {
     var sut: ArticlesListViewModel!
-    var repository: ChannelRepositoryStub!
+    var repository: ChannelRepositoryMock!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        repository = ChannelRepositoryStub()
+        repository = ChannelRepositoryMock()
         sut = ArticlesListViewModel(
             clearArticleCount: ClearNewArticleCountUseCase(channelRepository: repository),
             articles: [],

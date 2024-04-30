@@ -11,14 +11,14 @@ import XCTest
 @MainActor
 final class NewFeedViewModelTests: XCTestCase {
     var sut: NewFeedViewModel!
-    var channelRepository: ChannelRepositoryStub!
+    var channelRepository: ChannelRepositoryMock!
     var appFlagsPersistenceService: AppFlagsPersistenceServiceStub!
     var requestNotifications: RequestNotificationAuthorizationUseCaseStub!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        channelRepository = ChannelRepositoryStub()
+        channelRepository = ChannelRepositoryMock()
         appFlagsPersistenceService = AppFlagsPersistenceServiceStub()
         requestNotifications = RequestNotificationAuthorizationUseCaseStub()
         sut = NewFeedViewModel(
