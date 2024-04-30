@@ -21,6 +21,7 @@ extension GetChannelAndNewArticleCountPublisherUseCaseProtocol {
 struct GetChannelAndNewArticleCountPublisherUseCase: GetChannelAndNewArticleCountPublisherUseCaseProtocol {
     var getChannelsPublisher: GetChannelsPublisherUseCaseProtocol = GetChannelsPublisherUseCase()
     var getNewArticleCountPublisher: GetNewArticleCountPublisherUseCaseProtocol = GetNewArticleCountPublisherUseCase()
+    var mergeChannelsWithNewArticleCounts: MergeChannelsAndNewArticlesCountUseCaseProtocol = MergeChannelsAndNewArticlesCountUseCase()
     
     func execute() -> AnyPublisher<[ArticleCountChannel], Never> {
         let channelPublisher = getChannelsPublisher()
@@ -29,9 +30,7 @@ struct GetChannelAndNewArticleCountPublisherUseCase: GetChannelAndNewArticleCoun
         return channelPublisher
             .combineLatest(newArticleCountPublisher)
             .eraseToAnyPublisher()
-            .map { channels, articleCounts in
-                channels.map({ ArticleCountChannel(channel: $0, articleCount: articleCounts[$0.id] ?? 0) })
-            }
+            .map(mergeChannelsWithNewArticleCounts.execute)
             .eraseToAnyPublisher()
     }
 }

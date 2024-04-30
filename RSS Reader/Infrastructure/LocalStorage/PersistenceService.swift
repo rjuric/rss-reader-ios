@@ -8,9 +8,9 @@
 import Foundation
 
 struct PersistenceService {
-    let userDefaults = UserDefaults.standard
-    let encoder: JSONEncoder = JSONEncoder()
-    let decoder: JSONDecoder = JSONDecoder()
+    var userDefaults = UserDefaults.standard
+    var encoder: JSONEncoder = JSONEncoder()
+    var decoder: JSONDecoder = JSONDecoder()
 }
 
 extension PersistenceService: ChannelPersistenceServiceProtocol {

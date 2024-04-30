@@ -15,6 +15,11 @@ final class CheckDifferentArticlesCountUseCaseTests: XCTestCase {
         try super.setUpWithError()
         sut = CheckDifferentArticlesCountUseCase()
     }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
 
     func test_returns0_on_sameArticles() throws {
         
