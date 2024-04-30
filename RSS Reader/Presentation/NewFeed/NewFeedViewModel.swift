@@ -51,7 +51,7 @@ final class NewFeedViewModel: ObservableObject {
     
     lazy var isFirstFeed: Bool = !getDidShowOnboarding()
     
-    func onSubmit(with dismissAction: DismissAction) async {
+    func onSubmit(with dismissAction: () -> Void) async {
         isLoading = true
         defer { isLoading = false }
         
@@ -61,17 +61,16 @@ final class NewFeedViewModel: ObservableObject {
         
         do {
             try await subscribeToChannel(with: url)
+            await requestNotificationsAuthorization()
         } catch {
             isError = true
             return
         }
         
-        await requestNotificationsAuthorization()
-        
         var appFlags = getAppFlags()
         if appFlags.isNil {
             appFlags = AppFlags(didShowOnboarding: true)
-        } else {
+        } else if appFlags?.didShowOnboarding == false {
             appFlags?.didShowOnboarding = true
         }
         

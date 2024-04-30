@@ -101,7 +101,7 @@ struct NewFeedView: View {
     
     private func submit() {
         Task {
-            await viewModel.onSubmit(with: dismiss)
+            await viewModel.onSubmit(with: { dismiss() })
         }
     }
 }
