@@ -18,9 +18,11 @@ final class ChannelRepositoryStub: ChannelRepositoryProtocol {
         updateCalledWith.append(channel)
     }
     
+    var loadFromLocalStorageResult: Result<Void, Error> = .success(Void())
     var loadFromLocalStorageCallsCount: Int = 0
     func loadFromLocalStorage() async throws {
         loadFromLocalStorageCallsCount += 1
+        return try loadFromLocalStorageResult.get()
     }
     
     var subscribeToFeedReturnValue: Result<Void, Error> = .success(Void())
@@ -41,9 +43,11 @@ final class ChannelRepositoryStub: ChannelRepositoryProtocol {
         removeCalledFor.append(channel)
     }
     
+    var refreshAllChannelsResult: Result<Void, Error> = .success(Void())
     var refreshAllChannelsCallsCount: Int = 0
     func refreshAllChannels() async throws {
         refreshAllChannelsCallsCount += 1
+        return try refreshAllChannelsResult.get()
     }
     
     var refreshCalledWith: [Channel] = []
@@ -78,14 +82,16 @@ final class ChannelRepositoryStub: ChannelRepositoryProtocol {
     }
     
     var channelPublisherCallsCount: Int = 0
+    var channelSubject = CurrentValueSubject<[Channel], Never>([])
     var channelPublisher: AnyPublisher<[Channel], Never> {
         channelPublisherCallsCount += 1
-        return CurrentValueSubject<[Channel], Never>([]).eraseToAnyPublisher()
+        return channelSubject.eraseToAnyPublisher()
     }
     
     var articleCountPublisherCallsCount: Int = 0
+    var articleCountSubject = CurrentValueSubject<[String : Int], Never>([:])
     var articleCountPublisher: AnyPublisher<[String : Int], Never> {
         articleCountPublisherCallsCount += 1
-        return CurrentValueSubject<[String : Int], Never>([:]).eraseToAnyPublisher()
+        return articleCountSubject.eraseToAnyPublisher()
     }
 }

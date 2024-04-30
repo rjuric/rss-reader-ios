@@ -22,4 +22,6 @@ extension Channel: Identifiable {
     }
 }
 
+extension Channel: Equatable {}
+
 extension Channel: Codable {}
