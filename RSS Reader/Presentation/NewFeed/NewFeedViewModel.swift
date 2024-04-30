@@ -67,16 +67,9 @@ final class NewFeedViewModel: ObservableObject {
             return
         }
         
-        var appFlags = getAppFlags()
-        if appFlags.isNil {
-            appFlags = AppFlags(didShowOnboarding: true)
-        } else if appFlags?.didShowOnboarding == false {
-            appFlags?.didShowOnboarding = true
-        }
-        
-        guard let appFlags else {
-            dismissAction()
-            return
+        var appFlags = getAppFlags() ?? AppFlags(didShowOnboarding: false)
+        if appFlags.didShowOnboarding == false {
+            appFlags.didShowOnboarding = true
         }
         
         setAppFlags(appFlags)
